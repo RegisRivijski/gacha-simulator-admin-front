@@ -1,0 +1,29 @@
+<div v-on:keyup.enter="loginSend($event)">
+  <form>
+    <div style="width: 300px; margin: auto">
+      <div style="height: 70px">
+        <b-alert :show="errorLogin" variant="danger"
+                 class="text-left">
+            Невірний пароль або логін
+        </b-alert>
+        <b-alert :show="noSet" variant="warning"
+                 class="text-left">
+            Не всі поля є заповненими
+        </b-alert>
+      </div>
+      <div style="display: flow-root; margin-bottom: 5px">
+        <label style="float: left"> Login:</label>
+        <b-form-input style="float: right" type="text" v-model="login" required />
+      </div>
+      <div style="display: flow-root; margin-bottom: 5px">
+        <label style="float: left">Пароль:</label>
+        <b-form-input style="float: right" type="password" v-model="password" />
+      </div>
+      <div style="text-align: center">
+        <b-button pill variant="success" type="success" @click="loginSend($event)">
+          Увійти
+        </b-button>
+      </div>
+    </div>
+  </form>
+</div>

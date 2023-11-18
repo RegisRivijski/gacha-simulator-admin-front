@@ -1,0 +1,12 @@
+.icon-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+.vert-text {
+    transform: rotate(270deg);
+}
+.seo-blocks {
+    font-size: 0.8em;
+}

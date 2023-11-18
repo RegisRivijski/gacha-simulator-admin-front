@@ -1,0 +1,42 @@
+<template>
+  <div class="container mt-4">
+    <b-card v-for="data in allBannersData">
+      <b-card-header>
+        <h5 class="card-title">{{ data.objKey }}</h5>
+      </b-card-header>
+      <b-card-body>
+        <b-row>
+          <b-col md="6">
+            <ul class="list-group">
+              <li class="list-group-item"><strong>ID:</strong> {{ data._id.$oid }}</li>
+              <li class="list-group-item"><strong>Is Active:</strong> {{ data.isActive }}</li>
+              <li class="list-group-item"><strong>Type:</strong> {{ data.type }}</li>
+              <li class="list-group-item"><strong>Category:</strong> {{ data.category }}</li>
+              <li class="list-group-item"><strong>Object Key:</strong> {{ data.objKey }}</li>
+            </ul>
+          </b-col>
+          <b-col md="6">
+            <ul class="list-group">
+              <li class="list-group-item"><strong>Translations:</strong>
+                <ul>
+                  <li><strong>en:</strong> {{ data.translates.en }}</li>
+                  <li><strong>id:</strong> {{ data.translates.id }}</li>
+                  <li><strong>ko:</strong> {{ data.translates.ko }}</li>
+                  <li><strong>ru:</strong> {{ data.translates.ru }}</li>
+                  <li><strong>zh-hans:</strong> {{ data.translates['zh-hans'] }}</li>
+                </ul>
+              </li>
+              <li class="list-group-item"><strong>Characters:</strong>
+                <ul>
+                  <li v-for="(characters, stars) in data.characters" :key="stars">
+                    <strong>{{ stars }}-star:</strong> {{ characters.join(', ') }}
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </b-col>
+        </b-row>
+      </b-card-body>
+    </b-card>
+  </div>
+</template>

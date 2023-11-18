@@ -1,0 +1,39 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "extends": [
+    "plugin:vue/essential",
+    "airbnb-base",
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "rules": {
+    "linebreak-style": 0,
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "args": "after-used",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "no-param-reassign": "off",
+    "consistent-return": "warn",
+    "no-console": "off",
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "prefer-destructuring": "warn",
+    "no-restricted-syntax": "off",
+    "no-await-in-loop": "off",
+    "no-useless-escape": "warn",
+    "func-names": "off",
+    "import/no-unresolved": "off"
+  }
+}

@@ -1,0 +1,5 @@
+include:
+  - project: 'bu-auto-configs/gitlab-shared-library'
+    ref: master
+    file: 'gitlab-ci/main.yml'
+
