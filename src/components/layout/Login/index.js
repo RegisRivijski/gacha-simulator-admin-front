@@ -21,10 +21,12 @@ export default {
       this.noSet = false;
 
       if (this.login && this.password) {
-        const { data, status } = await this
-          .apiLogin({ login: this.login, password: this.password }) ?? {};
-        if (status === 200) {
-          localStorage.setItem('adminId', data.user_id);
+        const loginResponse = await this.apiLogin({
+          login: this.login,
+          password: this.password,
+        });
+        if (loginResponse?.login) {
+          localStorage.setItem('login', loginResponse.login);
           this.$router.push('/');
         } else {
           this.errorLogin = true;

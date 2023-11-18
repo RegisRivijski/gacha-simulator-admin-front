@@ -3,13 +3,11 @@ import * as authApi from '../api/auth';
 export default {
   namespaced: true,
   state: () => ({
-    userId: null,
-    fio: null,
+    login: null,
   }),
   mutations: {
-    setUser(state, user) {
-      state.userId = user.userId;
-      state.fio = user.fio;
+    setUser(state, login) {
+      state.login = login;
     },
   },
   actions: {
@@ -22,12 +20,11 @@ export default {
           console.error('[ERROR] store/user/actions/Login:', e.message);
         });
 
-      if (loginResponse?.data) {
-        commit('setUser', {
-          userId: loginResponse?.data?.user_id,
-          fio: loginResponse?.data?.fio,
-        });
+      if (loginResponse?.login) {
+        commit('setUser', loginResponse.login);
       }
+
+      return loginResponse;
     },
 
     async exit({ commit }) {
@@ -35,7 +32,7 @@ export default {
         .catch(e => {
           console.error('[ERROR] store/user/actions/user:', e.message);
         });
-      commit('setUser', { userId: null, fio: null });
+      commit('setUser', null);
     },
 
     async me({ commit }) {
@@ -44,11 +41,10 @@ export default {
           console.error('[ERROR] store/user/actions/me:', e.message);
         });
 
-      if (meResponse?.data) {
-        commit('setUser', {
-          userId: meResponse?.data?.user_id,
-          fio: meResponse?.data?.fio,
-        });
+      if (meResponse?.login) {
+        commit('setUser', meResponse.login);
+      } else {
+        commit('setUser', null);
       }
     },
   },
