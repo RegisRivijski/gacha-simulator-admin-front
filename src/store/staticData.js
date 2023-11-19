@@ -1,54 +1,45 @@
-import * as authApi from '../api/auth';
+import Vue from 'vue';
+
+import * as documentsUtil from '../utils/documents';
+import * as staticDataApi from '../api/staticData';
 
 export default {
   namespaced: true,
   state: () => ({
-    userId: null,
-    fio: null,
+    characters: [],
+    weapons: [],
   }),
   mutations: {
-    setUser(state, user) {
-      state.userId = user.userId;
-      state.fio = user.fio;
+    setCharacters(state, characters) {
+      const array = Object.values(characters);
+      const sortedArray = documentsUtil.sortArrayOfObjectsByKey(array, 'name');
+      Vue.set(state, 'characters', sortedArray);
+    },
+    setWeapons(state, weapons) {
+      const array = Object.values(weapons);
+      const sortedArray = documentsUtil.sortArrayOfObjectsByKey(array, 'name');
+      Vue.set(state, 'weapons', sortedArray);
+    },
+  },
+  getters: {
+    characters(state) {
+      return state.characters;
+    },
+    weapons(state) {
+      return state.weapons;
     },
   },
   actions: {
-    async login({ commit }, { login, password }) {
-      const loginResponse = await authApi.loginAction({
-        login,
-        password,
-      })
-        .catch(e => {
-          console.error('[ERROR] store/user/actions/Login:', e.message);
-        });
+    async getAllItems({ commit }) {
+      const characters = await staticDataApi.getItemsData('characters', 'ru');
 
-      if (loginResponse?.data) {
-        commit('setUser', {
-          userId: loginResponse?.data?.user_id,
-          fio: loginResponse?.data?.fio,
-        });
+      const weapons = await staticDataApi.getItemsData('weapons', 'ru');
+
+      if (characters) {
+        commit('setCharacters', characters);
       }
-    },
-
-    async exit({ commit }) {
-      await authApi.exit()
-        .catch(e => {
-          console.error('[ERROR] store/user/actions/user:', e.message);
-        });
-      commit('setUser', { userId: null, fio: null });
-    },
-
-    async me({ commit }) {
-      const meResponse = await authApi.me()
-        .catch(e => {
-          console.error('[ERROR] store/user/actions/me:', e.message);
-        });
-
-      if (meResponse?.data) {
-        commit('setUser', {
-          userId: meResponse?.data?.user_id,
-          fio: meResponse?.data?.fio,
-        });
+      if (weapons) {
+        commit('setWeapons', weapons);
       }
     },
   },

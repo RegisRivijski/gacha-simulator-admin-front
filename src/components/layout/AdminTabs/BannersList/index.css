@@ -1,12 +1,30 @@
-.icon-delete {
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
+.genshin-card {
+    margin-bottom: 20px;
+    background-color: #3b3d40;
+    border: none;
 }
-.vert-text {
-    transform: rotate(270deg);
+
+.genshin-card-header {
+    background-color: #2d2d2d;
+    border-bottom: 1px solid #6c757d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.seo-blocks {
-    font-size: 0.8em;
+
+.genshin-card-body {
+    padding: 20px;
+}
+
+.genshin-list-item {
+    background-color: #3b3d40;
+    border: none;
+}
+
+.genshin-sub-list {
+    padding-left: 20px;
+}
+
+.genshin-button {
+    margin-right: 10px;
 }

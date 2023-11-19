@@ -5,10 +5,10 @@ export default {
   computed: {
     ...mapState(['user']),
     adminName() {
-      return this.user?.fio?.trim() ?? '';
+      return this.user?.login?.trim() ?? 'Неизвестный (пожалуйста, закрой страницу)';
     },
-    isExitBtnDisabled() {
-      return !this.user?.userId;
+    isLogged() {
+      return Boolean(this.user?.login);
     },
   },
   methods: {

@@ -1,10 +1,13 @@
-<div>
-  <nav class="d-flex justify-content-start">
-    <router-link class="px-1" :to="{ name: 'banners' }">
-      <b-button pill variant="info">
-        Редагування Молитв
-      </b-button>
-    </router-link>
-  </nav>
-  <router-view />
-</div>
+<template>
+  <div>
+    <nav class="nav-genshin">
+      <router-link class="nav-link" :to="{ name: 'banners' }">
+        <b-button pill variant="info" class="nav-button">
+          Редактирование Баннеров
+        </b-button>
+      </router-link>
+      <!-- Добавьте другие вкладки по аналогии -->
+    </nav>
+    <router-view />
+  </div>
+</template>

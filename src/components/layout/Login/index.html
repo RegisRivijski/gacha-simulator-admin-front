@@ -1,29 +1,29 @@
-<div v-on:keyup.enter="loginSend($event)">
-  <form>
-    <div style="width: 300px; margin: auto">
-      <div style="height: 70px">
-        <b-alert :show="errorLogin" variant="danger"
-                 class="text-left">
-            Невірний пароль або логін
-        </b-alert>
-        <b-alert :show="noSet" variant="warning"
-                 class="text-left">
-            Не всі поля є заповненими
-        </b-alert>
+<template>
+  <div v-on:keyup.enter="loginSend($event)" class="genshin-login">
+    <form>
+      <div class="login-container">
+        <div class="login-header">
+          <b-alert :show="errorLogin" variant="danger" class="text-left">
+            Неверный логин или пароль
+          </b-alert>
+          <b-alert :show="noSet" variant="warning" class="text-left">
+            Не все поля заполнены
+          </b-alert>
+        </div>
+        <div class="login-input">
+          <label class="genshin-label">Логин:</label>
+          <b-form-input type="text" v-model="login" required class="genshin-input" />
+        </div>
+        <div class="login-input">
+          <label class="genshin-label">Пароль:</label>
+          <b-form-input type="password" v-model="password" class="genshin-input" />
+        </div>
+        <div class="login-button">
+          <b-button pill variant="danger" type="success" @click="loginSend($event)" class="genshin-button">
+            Войти
+          </b-button>
+        </div>
       </div>
-      <div style="display: flow-root; margin-bottom: 5px">
-        <label style="float: left"> Login:</label>
-        <b-form-input style="float: right" type="text" v-model="login" required />
-      </div>
-      <div style="display: flow-root; margin-bottom: 5px">
-        <label style="float: left">Пароль:</label>
-        <b-form-input style="float: right" type="password" v-model="password" />
-      </div>
-      <div style="text-align: center">
-        <b-button pill variant="success" type="success" @click="loginSend($event)">
-          Увійти
-        </b-button>
-      </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+</template>

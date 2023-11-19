@@ -3,58 +3,77 @@
     <b-form @submit.prevent="handleSubmit">
       <b-form-group label="Is Active:" label-for="isActive">
         <b-form-select v-model="formData.isActive" id="isActive">
-          <option value="true">True</option>
-          <option value="false">False</option>
+          <option :value="true">True</option>
+          <option :value="false">False</option>
         </b-form-select>
       </b-form-group>
 
       <b-form-group label="Type:" label-for="type">
         <b-form-select v-model="formData.type" id="type">
-          <option value="character">Character</option>
-          <option value="weapon">Weapon</option>
-          <!-- Add more options as needed -->
+          <option value="character">Баннер Персонажей</option>
+          <option value="weapon">Баннер Оружия</option>
         </b-form-select>
       </b-form-group>
 
       <b-form-group label="Category:" label-for="category">
         <b-form-select v-model="formData.category" id="category">
-          <option value="event">Event</option>
-          <option value="quest">Quest</option>
-          <!-- Add more options as needed -->
+          <option value="event">Игровой</option>
+          <option value="universal">Универсальный</option>
         </b-form-select>
       </b-form-group>
 
       <b-form-group label="Object Key:" label-for="objKey">
-        <b-form-input v-model="formData.objKey" id="objKey" type="text"></b-form-input>
+        <b-form-input required v-model="formData.objKey" id="objKey" type="text"></b-form-input>
+        <small class="form-text text-muted">
+          Убедитесь, что значение "Object Key" совпадает с переводом на английский ('en') для соответствия стандартам.
+        </small>
       </b-form-group>
 
       <b-form-group label="Translates:" label-for="en">
-        <!-- Add text input fields for each translation -->
-        <b-form-input v-model="formData.translates.en" id="en" type="text" placeholder="en"></b-form-input>
-        <b-form-input v-model="formData.translates.id" id="id" type="text" placeholder="id"></b-form-input>
-        <b-form-input v-model="formData.translates.ko" id="ko" type="text" placeholder="ko"></b-form-input>
-        <b-form-input v-model="formData.translates.ru" id="ru" type="text" placeholder="ru"></b-form-input>
-        <b-form-input v-model="formData.translates['zh-hans']" id="zh-hans" type="text" placeholder="zh-hans"></b-form-input>
+        <b-form-input required v-model="formData.translates.en" id="en" type="text" placeholder="en"></b-form-input>
+        <b-form-input required v-model="formData.translates.id" id="id" type="text" placeholder="id"></b-form-input>
+        <b-form-input required v-model="formData.translates.ko" id="ko" type="text" placeholder="ko"></b-form-input>
+        <b-form-input required v-model="formData.translates.ru" id="ru" type="text" placeholder="ru"></b-form-input>
+        <b-form-input required v-model="formData.translates['zh-hans']" id="zh-hans" type="text" placeholder="zh-hans"></b-form-input>
       </b-form-group>
 
-      <b-form-group label="Characters:" label-for="characterStars">
-        <!-- Add select and buttons for characters -->
-        <b-form-select v-model="selectedCharacterStars" id="characterStars">
-          <option value="4">4 Stars</option>
-          <option value="5">5 Stars</option>
-          <!-- Add more options as needed -->
-        </b-form-select>
-        <b-list-group id="charactersList">
-          <!-- Characters will be dynamically added here -->
-          <b-list-group-item v-for="(character, index) in formData.characters[selectedCharacterStars]" :key="index">
-            {{ character }}
-          </b-list-group-item>
-        </b-list-group>
-        <b-button @click="addCharacter" variant="primary">Add Character</b-button>
-        <b-button @click="removeCharacter" variant="danger">Remove Character</b-button>
+      <b-form-group label="Characters:" label-for="characters">
+        <div v-for="(characters, stars) in formData.characters" :key="stars">
+          <b-form-group :label="`${stars} Stars:`">
+            <div v-if="characters.length > 0">
+              <div v-for="(character, index) in characters" :key="index" class="d-flex mb-2 align-items-center">
+                <b-form-select v-model="characters[index]" :options="optionsCharacter(stars)" class="mr-2"></b-form-select>
+                <b-button @click="addCharacter(stars)" variant="primary" class="mr-2">+</b-button>
+                <b-button @click="removeCharacter(stars, index)" variant="danger">-</b-button>
+              </div>
+            </div>
+            <div v-else>
+              <div class="d-flex mb-2 align-items-center">
+                <b-button @click="addCharacter(stars)" variant="primary" class="mr-2">+</b-button>
+              </div>
+            </div>
+          </b-form-group>
+        </div>
       </b-form-group>
 
-      <!-- Add similar sections for weapons -->
+      <b-form-group label="Weapons:" label-for="weapons">
+        <div v-for="(weapons, stars) in formData.weapons" :key="stars">
+          <b-form-group :label="`${stars} Stars:`">
+            <div v-if="weapons.length > 0">
+              <div v-for="(weapon, index) in weapons" :key="index" class="d-flex mb-2 align-items-center">
+                <b-form-select v-model="weapons[index]" :options="optionsWeapon(stars)" class="mr-2"></b-form-select>
+                <b-button @click="addWeapon(stars)" variant="primary" class="mr-2">+</b-button>
+                <b-button @click="removeWeapon(stars, index)" variant="danger">-</b-button>
+              </div>
+            </div>
+            <div v-else>
+              <div class="d-flex mb-2 align-items-center">
+                <b-button @click="addWeapon(stars)" variant="primary" class="mr-2">+</b-button>
+              </div>
+            </div>
+          </b-form-group>
+        </div>
+      </b-form-group>
 
       <b-button type="submit" variant="success">Save Changes</b-button>
     </b-form>

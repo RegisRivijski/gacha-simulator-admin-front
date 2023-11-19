@@ -1,24 +1,77 @@
 <template>
-  <div class="container mt-4">
-    <b-card v-for="data in allBannersData">
-      <b-card-header>
-        <h5 class="card-title">{{ data.objKey }}</h5>
+  <div class="container mt-4 genshin-admin">
+
+    <div class="alert alert-info" role="alert">
+      <p>
+        Для более подробной информации о текущих активных банерах, доступных в игре Genshin Impact, рекомендуется
+        воспользоваться данным <a href="https://genshin-impact.fandom.com/wiki/Wish" target="_blank">ресурсом</a>.
+      </p>
+      <p>
+        Здесь вы найдете списки персонажей и оружия, которые доступны в каждом банере, а также их названия на разных языках.
+        Пожалуйста, сверяйте эту информацию при редактировании банеров.
+      </p>
+    </div>
+
+    <div class="mb-3">
+      <b-button pill variant="success" @click="addBanner">Добавить новый баннер</b-button>
+    </div>
+
+    <b-form class="mb-3">
+      <b-row>
+        <b-col md="3">
+          <b-form-group label="Поиск по Object Key:" label-for="filterObjKey">
+            <b-form-input v-model="filterObjKey" id="filterObjKey"></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col md="3">
+          <b-form-group label="Статус активации:" label-for="filterIsActive">
+            <b-form-select v-model="filterIsActive" :options="filterIsActiveOptions" id="filterIsActive"></b-form-select>
+          </b-form-group>
+        </b-col>
+        <b-col md="3">
+          <b-form-group label="Type:" label-for="filterType">
+            <b-form-select v-model="filterType" :options="filterTypeOptions" id="filterType"></b-form-select>
+          </b-form-group>
+        </b-col>
+        <b-col md="3">
+          <b-form-group label="Category:" label-for="filterCategory">
+            <b-form-select v-model="filterCategory" :options="filterCategoryOptions" id="filterCategory"></b-form-select>
+          </b-form-group>
+        </b-col>
+      </b-row>
+    </b-form>
+
+    <!-- Список баннеров -->
+    <b-card v-for="data in filteredBanners" :key="data._id.$oid" class="genshin-card">
+      <b-card-header class="genshin-card-header d-flex justify-content-between">
+        <div>
+          <h5 class="card-title">{{ data.objKey }}</h5>
+        </div>
+        <!-- Добавленные кнопки для управления баннером -->
+        <div class="d-flex">
+          <b-button pill variant="info" @click="editBanner(data)">Редактировать</b-button>
+          <b-button pill variant="danger" @click="deleteBanner(data)">Удалить</b-button>
+          <b-button pill :variant="data.isActive ? 'warning' : 'success'" @click="toggleActivation(data)">
+            {{ data.isActive ? 'Деактивировать' : 'Активировать' }}
+          </b-button>
+        </div>
       </b-card-header>
-      <b-card-body>
+
+      <b-card-body class="genshin-card-body">
         <b-row>
           <b-col md="6">
             <ul class="list-group">
-              <li class="list-group-item"><strong>ID:</strong> {{ data._id.$oid }}</li>
-              <li class="list-group-item"><strong>Is Active:</strong> {{ data.isActive }}</li>
-              <li class="list-group-item"><strong>Type:</strong> {{ data.type }}</li>
-              <li class="list-group-item"><strong>Category:</strong> {{ data.category }}</li>
-              <li class="list-group-item"><strong>Object Key:</strong> {{ data.objKey }}</li>
+              <li class="list-group-item genshin-list-item"><strong>ID:</strong> {{ data._id }}</li>
+              <li class="list-group-item genshin-list-item"><strong>Is Active:</strong> {{ data.isActive }}</li>
+              <li class="list-group-item genshin-list-item"><strong>Type:</strong> {{ data.type }}</li>
+              <li class="list-group-item genshin-list-item"><strong>Category:</strong> {{ data.category }}</li>
+              <li class="list-group-item genshin-list-item"><strong>Object Key:</strong> {{ data.objKey }}</li>
             </ul>
           </b-col>
           <b-col md="6">
             <ul class="list-group">
-              <li class="list-group-item"><strong>Translations:</strong>
-                <ul>
+              <li class="list-group-item genshin-list-item"><strong>Translations:</strong>
+                <ul class="genshin-sub-list">
                   <li><strong>en:</strong> {{ data.translates.en }}</li>
                   <li><strong>id:</strong> {{ data.translates.id }}</li>
                   <li><strong>ko:</strong> {{ data.translates.ko }}</li>
@@ -26,10 +79,17 @@
                   <li><strong>zh-hans:</strong> {{ data.translates['zh-hans'] }}</li>
                 </ul>
               </li>
-              <li class="list-group-item"><strong>Characters:</strong>
-                <ul>
+              <li v-if="data.characters" class="list-group-item genshin-list-item"><strong>Characters:</strong>
+                <ul class="genshin-sub-list">
                   <li v-for="(characters, stars) in data.characters" :key="stars">
                     <strong>{{ stars }}-star:</strong> {{ characters.join(', ') }}
+                  </li>
+                </ul>
+              </li>
+              <li v-if="data.weapons" class="list-group-item genshin-list-item"><strong>Weapons:</strong>
+                <ul class="genshin-sub-list">
+                  <li v-for="(weapons, stars) in data.weapons" :key="stars">
+                    <strong>{{ stars }}-star:</strong> {{ weapons.join(', ') }}
                   </li>
                 </ul>
               </li>

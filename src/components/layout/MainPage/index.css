@@ -1,0 +1,21 @@
+.nav-genshin {
+    display: flex;
+    justify-content: start;
+    background-color: #3b3d40; /* Цвет фона в соответствии с Genshin Impact */
+    padding: 10px 20px;
+}
+
+.nav-link {
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.nav-button {
+    background-color: #2196f3; /* Цвет кнопки в соответствии с Genshin Impact */
+    color: #fff; /* Белый цвет текста кнопки */
+    border: none;
+}
+
+.nav-button:hover {
+    background-color: #1e88e5; /* Цвет при наведении на кнопку */
+}

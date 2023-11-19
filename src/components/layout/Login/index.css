@@ -1,0 +1,41 @@
+.genshin-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: #2d2d2d; /* Цвет фона в соответствии с Genshin Impact */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.login-header {
+    margin-bottom: 20px;
+}
+
+.genshin-label {
+    color: #fff; /* Белый цвет текста */
+}
+
+.genshin-input {
+    background-color: #3b3d40; /* Цвет поля ввода в соответствии с Genshin Impact */
+    color: #fff; /* Белый цвет текста в поле ввода */
+}
+
+.login-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.genshin-button {
+    background-color: #e0314f; /* Красный цвет кнопки в соответствии с Genshin Impact */
+    color: #fff; /* Белый цвет текста на кнопке */
+    border: none;
+}
+
+.genshin-button:hover {
+    background-color: #c82343; /* Цвет при наведении на кнопку */
+}

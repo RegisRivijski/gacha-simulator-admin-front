@@ -1,12 +1,9 @@
 import store from '../store';
 
-export default async function (_to, _from, next) {
+export default async function (to, from, next) {
+  await store.dispatch('user/me');
   if (!store.state.user?.login) {
-    await store.dispatch('user/me');
-    if (!store.state.user?.login) {
-      next({ name: 'login' });
-      return;
-    }
+    return next({ name: 'login' });
   }
-  next();
+  return next();
 }

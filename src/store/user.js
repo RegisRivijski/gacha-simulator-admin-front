@@ -15,10 +15,7 @@ export default {
       const loginResponse = await authApi.loginAction({
         login,
         password,
-      })
-        .catch(e => {
-          console.error('[ERROR] store/user/actions/Login:', e.message);
-        });
+      });
 
       if (loginResponse?.login) {
         commit('setUser', loginResponse.login);
@@ -28,18 +25,12 @@ export default {
     },
 
     async exit({ commit }) {
-      await authApi.exit()
-        .catch(e => {
-          console.error('[ERROR] store/user/actions/user:', e.message);
-        });
+      await authApi.exit();
       commit('setUser', null);
     },
 
     async me({ commit }) {
-      const meResponse = await authApi.me()
-        .catch(e => {
-          console.error('[ERROR] store/user/actions/me:', e.message);
-        });
+      const meResponse = await authApi.me();
 
       if (meResponse?.login) {
         commit('setUser', meResponse.login);

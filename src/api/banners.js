@@ -2,24 +2,31 @@ import axios from 'axios';
 
 export function bannersAll() {
   return axios
-    .get('/gacha-simulator/api/banners/all')
+    .get('/gacha-simulator/api/banners-all')
     .then(({ data }) => data);
 }
 
-export function bannersChange() {
+export function bannersGetById(bannerId) {
   return axios
-    .put('/gacha-simulator/api/banners')
+    .get(`/gacha-simulator/api/banners/${bannerId}`)
     .then(({ data }) => data);
 }
 
-export function bannersDelete() {
+export function bannersChange(bannerData) {
+  console.log(bannerData);
   return axios
-    .delete('/gacha-simulator/api/banners')
+    .put('/gacha-simulator/api/banners', { bannerData })
     .then(({ data }) => data);
 }
 
-export function bannersCreate() {
+export function bannersDelete(bannerId) {
   return axios
-    .post('/gacha-simulator/api/banners')
+    .delete(`/gacha-simulator/api/banners/${bannerId}`)
+    .then(({ data }) => data);
+}
+
+export function bannersCreate(bannerData) {
+  return axios
+    .post('/gacha-simulator/api/banners', { bannerData })
     .then(({ data }) => data);
 }

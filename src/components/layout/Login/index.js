@@ -26,6 +26,12 @@ export default {
           password: this.password,
         });
         if (loginResponse?.login) {
+          this.$notify({
+            group: 'foo',
+            type: 'success',
+            title: `Привет, ${loginResponse.login}!`,
+            text: 'Ты делаешь этот мир лучше.',
+          });
           localStorage.setItem('login', loginResponse.login);
           this.$router.push('/');
         } else {

@@ -1,18 +1,12 @@
-html {
-    overflow-x: hidden;
+.genshin-app {
+    font-family: 'YourCustomFont', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    background-color: #2d2d2d;
 }
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-}
-body {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #333;
-    background-color: #ffedd1;
-    margin: unset;
+
+@font-face {
+    font-family: 'YourCustomFont';
+    src: url('https://artur-petrov.vinnica.ua/public/gacha-simulator-static-data/assets/fonts/ja-jp.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }

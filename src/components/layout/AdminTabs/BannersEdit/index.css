@@ -1,0 +1,22 @@
+.genshin-form {
+    background-color: #2d2d2d;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
+}
+
+.genshin-form-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.genshin-form-header h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.genshin-form-header p {
+    font-size: 14px;
+    opacity: 0.8;
+}
