@@ -47,8 +47,7 @@
         <div>
           <h5 class="card-title">{{ data.objKey }}</h5>
         </div>
-        <!-- Добавленные кнопки для управления баннером -->
-        <div class="d-flex">
+        <div class="d-flex flex-column flex-md-row">
           <b-button pill variant="info" @click="editBanner(data)">Редактировать</b-button>
           <b-button pill variant="danger" @click="deleteBanner(data)">Удалить</b-button>
           <b-button pill :variant="data.isActive ? 'warning' : 'success'" @click="toggleActivation(data)">
