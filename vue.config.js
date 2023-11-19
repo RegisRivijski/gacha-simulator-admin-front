@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/',
+  publicPath: '/gacha-simulator/admin',
   devServer: {
     proxy: {
       '/gacha-simulator/api/': {
