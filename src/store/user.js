@@ -30,7 +30,8 @@ export default {
     },
 
     async me({ commit }) {
-      const meResponse = await authApi.me();
+      const meResponse = await authApi.me()
+        .catch(e => console.error(e.message));
 
       if (meResponse?.login) {
         commit('setUser', meResponse.login);
