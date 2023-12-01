@@ -97,7 +97,7 @@ export default {
       return this.characters
         .filter(({ rarity }) => Number(rarity) === Number(stars))
         .map(characterData => ({
-          text: characterData.name,
+          text: characterData.objKey,
           value: characterData.objKey,
         }));
     },
@@ -111,7 +111,7 @@ export default {
       return this.weapons
         .filter(({ rarity }) => Number(rarity) === Number(stars))
         .map(weaponData => ({
-          text: weaponData.name,
+          text: weaponData.objKey,
           value: weaponData.objKey,
         }));
     },
