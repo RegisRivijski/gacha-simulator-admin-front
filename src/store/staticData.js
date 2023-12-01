@@ -12,12 +12,12 @@ export default {
   mutations: {
     setCharacters(state, characters) {
       const array = Object.values(characters);
-      const sortedArray = documentsUtil.sortArrayOfObjectsByKey(array, 'name');
+      const sortedArray = documentsUtil.sortArrayOfObjectsByKey(array, 'objKey');
       Vue.set(state, 'characters', sortedArray);
     },
     setWeapons(state, weapons) {
       const array = Object.values(weapons);
-      const sortedArray = documentsUtil.sortArrayOfObjectsByKey(array, 'name');
+      const sortedArray = documentsUtil.sortArrayOfObjectsByKey(array, 'objKey');
       Vue.set(state, 'weapons', sortedArray);
     },
   },
