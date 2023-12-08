@@ -1,0 +1,22 @@
+<template>
+  <div class="container mt-4">
+    <b-form @submit.prevent="handleSubmit">
+
+      <b-form-group label="Promocode:" label-for="promocode">
+        <b-form-input required v-model="formData.promocode" id="promocode" type="text" placeholder="Текст промокода"></b-form-input>
+      </b-form-group>
+
+      <b-form-group label="Ресурсы которые начисляться игроку:" label-for="primoges">
+        <b-form-input v-model="formData.primogems" id="primoges" type="number" placeholder="Камни истока"></b-form-input>
+        <b-form-input v-model="formData.stardust" id="stardust" type="number" placeholder="Звёздная пыль"></b-form-input>
+        <b-form-input v-model="formData.starglitter" id="starglitter" type="number" placeholder="Звёздный блеск"></b-form-input>
+      </b-form-group>
+
+        <b-form-group label="Количество игроков которые смогут получить награду:" label-for="promocode">
+            <b-form-input required v-model="formData.count" id="promocode" type="number"></b-form-input>
+        </b-form-group>
+
+      <b-button type="submit" variant="success">Save Changes</b-button>
+    </b-form>
+  </div>
+</template>

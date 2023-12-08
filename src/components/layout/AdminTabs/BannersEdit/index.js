@@ -7,38 +7,37 @@ export default {
   computed: {
     ...mapGetters({
       formData: 'banners/currentBanner',
-      currentBannerArray: 'banners/currentBannerArray',
       characters: 'staticData/characters',
       weapons: 'staticData/weapons',
     }),
   },
-  created() {
-    this.setCurrentBanner({
-      isActive: true,
-      type: 'character',
-      category: 'event',
-      objKey: '',
-      translates: {
-        en: '',
-        id: '',
-        ko: '',
-        ru: '',
-        'zh-hans': '',
-      },
-      characters: {
-        4: [],
-        5: [],
-      },
-      weapons: {
-        3: [],
-        4: [],
-        5: [],
-      },
-    });
-
+  mounted() {
     const bannerId = this.$route.params?.bannerId;
     if (bannerId) {
       this.fetchBannerById(bannerId);
+    } else {
+      this.setCurrentBanner({
+        isActive: true,
+        type: 'character',
+        category: 'event',
+        objKey: '',
+        translates: {
+          en: '',
+          id: '',
+          ko: '',
+          ru: '',
+          'zh-hans': '',
+        },
+        characters: {
+          4: [],
+          5: [],
+        },
+        weapons: {
+          3: [],
+          4: [],
+          5: [],
+        },
+      });
     }
     this.getAllItems();
   },
@@ -64,6 +63,7 @@ export default {
               title: 'Твои изменения успешно внесены!',
               text: 'Теперь мы будет следить за тобой.',
             });
+            this.$router.push('/gacha-simulator/admin/banners');
           })
           .catch(() => {
             this.$notify({
@@ -82,6 +82,7 @@ export default {
               title: 'Баннер успешно создан!',
               text: 'Спасибо, за то что радуешь игроков.',
             });
+            this.$router.push('/gacha-simulator/admin/banners');
           })
           .catch(() => {
             this.$notify({
