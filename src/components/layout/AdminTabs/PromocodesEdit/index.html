@@ -7,12 +7,26 @@
       </b-form-group>
 
       <b-form-group label="Ресурсы которые начисляться игроку:" label-for="primoges">
+        <small class="form-text text-muted">
+          Камни истока
+        </small>
         <b-form-input v-model="formData.primogems" id="primoges" type="number" placeholder="Камни истока"></b-form-input>
+
+        <small class="form-text text-muted">
+            Звёздная пыль
+        </small>
         <b-form-input v-model="formData.stardust" id="stardust" type="number" placeholder="Звёздная пыль"></b-form-input>
+
+        <small class="form-text text-muted">
+            Звёздный блеск
+        </small>
         <b-form-input v-model="formData.starglitter" id="starglitter" type="number" placeholder="Звёздный блеск"></b-form-input>
       </b-form-group>
 
-        <b-form-group label="Количество игроков которые смогут получить награду:" label-for="promocode">
+        <small class="form-text text-muted">
+            Количество игроков, которые смогут использовать данный промокод
+        </small>
+        <b-form-group label="Количество:" label-for="promocode">
             <b-form-input required v-model="formData.count" id="promocode" type="number"></b-form-input>
         </b-form-group>
 
