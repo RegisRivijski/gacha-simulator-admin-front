@@ -1,0 +1,49 @@
+<template>
+    <div class="edit-advertisement-form container mt-4">
+        <b-container>
+            <b-form @submit.prevent="handleSubmit">
+                <b-form-group label="Ссылка на изображение:" label-for="image-link-input">
+                    <b-form-input
+                            id="image-link-input"
+                            v-model="formData.imageLink"
+                            placeholder="Введите ссылку на изображение"
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group label="Текст сообщения:" label-for="message-textarea">
+                    <b-form-textarea
+                            id="message-textarea"
+                            v-model="formData.message"
+                            placeholder="Введите текст сообщения"
+                            rows="3"
+                    ></b-form-textarea>
+                </b-form-group>
+
+                <b-form-group>
+                    <b-form-checkbox v-model="formData.groups">
+                        Отправить группам
+                    </b-form-checkbox>
+                    <b-form-checkbox v-model="formData.users">
+                        Отправить пользователям
+                    </b-form-checkbox>
+                </b-form-group>
+
+                <b-form-group>
+                    <b-form-checkbox v-model="formData.delivered">
+                        Реклама доставлена
+                    </b-form-checkbox>
+                </b-form-group>
+
+                <b-form-group label="Отправить после:" label-for="send-after-input">
+                    <b-form-input
+                            id="send-after-input"
+                            type="datetime-local"
+                            v-model="formData.sendAfter"
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-button type="submit" variant="primary">Сохранить изменения</b-button>
+            </b-form>
+        </b-container>
+    </div>
+</template>

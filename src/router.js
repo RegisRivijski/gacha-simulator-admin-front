@@ -53,6 +53,24 @@ const routes = [
         component: () => import('./components/layout/AdminTabs/PromocodesEdit/index.vue'),
         beforeEnter: authGuard,
       },
+      {
+        path: '/gacha-simulator/admin/advertisements',
+        name: 'advertisements',
+        component: () => import('./components/layout/AdminTabs/AdvertisementsList/index.vue'),
+        beforeEnter: authGuard,
+      },
+      {
+        path: '/gacha-simulator/admin/advertisements/:advId',
+        name: 'advertisementEdit',
+        component: () => import('./components/layout/AdminTabs/AdvertisementsEdit/index.vue'),
+        beforeEnter: authGuard,
+      },
+      {
+        path: '/gacha-simulator/admin/advertisements-add',
+        name: 'advertisementAdd',
+        component: () => import('./components/layout/AdminTabs/AdvertisementsEdit/index.vue'),
+        beforeEnter: authGuard,
+      },
     ],
   },
 ];

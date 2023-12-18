@@ -1,0 +1,28 @@
+<template>
+    <div class="advertisements-view">
+        <b-container>
+            <h2 class="genshin-heading">Управление рекламными постами</h2>
+
+            <div class="mb-3">
+                <b-button pill variant="success" @click="addNewAdvertisement">Добавить новый пост</b-button>
+            </div>
+
+            <b-row>
+                <b-col v-for="advertisement in allAdvertisements" :key="advertisement._id" md="4">
+                    <b-card class="advertisement-card">
+                        <b-card-title class="advertisement-card-title">{{ truncateText(advertisement.message, 100) }}</b-card-title>
+                        <b-card-text class="advertisement-card-text">
+                            <p>Ссылка на изображение: {{ advertisement.imageLink }}</p>
+                            <p>Группы: {{ advertisement.groups ? 'Да' : 'Нет' }}</p>
+                            <p>Пользователи: {{ advertisement.users ? 'Да' : 'Нет' }}</p>
+                            <p>Отправлено: {{ advertisement.delivered ? 'Да' : 'Нет' }}</p>
+                            <p>Отправить после: {{ formatLocalTime(advertisement.sendAfter) }}</p>
+                        </b-card-text>
+                        <b-button @click="editAdvertisement(advertisement)" variant="info" class="advertisement-button">Редактировать</b-button>
+                        <b-button @click="deleteAdvertisement(advertisement._id)" variant="danger" class="advertisement-button advertisement-button-delete">Удалить</b-button>
+                    </b-card>
+                </b-col>
+            </b-row>
+        </b-container>
+    </div>
+</template>

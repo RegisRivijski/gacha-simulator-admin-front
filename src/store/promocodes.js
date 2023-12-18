@@ -32,9 +32,7 @@ export default {
     async fetchAllPromocodes({ commit }) {
       const allPromocodesData = await promocodesApi.promocodesAll();
 
-      if (allPromocodesData?.length) {
-        commit('setAllPromocodes', allPromocodesData);
-      }
+      commit('setAllPromocodes', allPromocodesData);
     },
     async fetchPromocodesById({ commit }, promocodeId) {
       const promocodeData = await promocodesApi.promocodesGetById(promocodeId);

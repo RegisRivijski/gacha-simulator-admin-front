@@ -32,9 +32,7 @@ export default {
     async fetchAllBanners({ commit }) {
       const allBannersData = await bannersApi.bannersAll();
 
-      if (allBannersData?.length) {
-        commit('setAllBannersData', allBannersData);
-      }
+      commit('setAllBannersData', allBannersData);
     },
     async fetchBannerById({ commit }, bannerId) {
       const bannerData = await bannersApi.bannersGetById(bannerId);
