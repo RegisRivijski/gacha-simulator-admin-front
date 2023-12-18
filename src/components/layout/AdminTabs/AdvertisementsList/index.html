@@ -10,9 +10,9 @@
             <b-row>
                 <b-col v-for="advertisement in allAdvertisements" :key="advertisement._id" md="4">
                     <b-card class="advertisement-card">
-                        <b-card-title class="advertisement-card-title">{{ truncateText(advertisement.message, 100) }}</b-card-title>
+                        <b-card-title class="advertisement-card-title">{{ truncateText(advertisement.message, 80) }}</b-card-title>
                         <b-card-text class="advertisement-card-text">
-                            <p>Ссылка на изображение: {{ advertisement.imageLink }}</p>
+                            <p v-if="advertisement.imageLink"><a target="_blank" :href="advertisement.imageLink">Ссылка на изображение</a></p>
                             <p>Группы: {{ advertisement.groups ? 'Да' : 'Нет' }}</p>
                             <p>Пользователи: {{ advertisement.users ? 'Да' : 'Нет' }}</p>
                             <p>Отправлено: {{ advertisement.delivered ? 'Да' : 'Нет' }}</p>
