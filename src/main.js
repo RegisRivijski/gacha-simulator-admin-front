@@ -11,11 +11,7 @@ import store from './store';
 import router from './router';
 
 Vue.config.errorHandler = function (err, vm, info) {
-  console.error('Custom vue error handler: ', err, vm.name, info);
-};
-
-Vue.config.warnHandler = function (err, vm, info) {
-  console.warn('Custom vue warn handler: ', err, vm.name, info);
+  console.error(`Global Error Handler: Ошибка: ${err.toString()}\nИнформация: ${info}`);
 };
 
 Vue.config.productionTip = false;
