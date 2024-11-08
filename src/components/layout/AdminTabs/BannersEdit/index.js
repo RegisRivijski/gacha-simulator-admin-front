@@ -54,53 +54,18 @@ export default {
     handleSubmit() {
       const bannerId = this.$route.params?.bannerId;
       if (bannerId) {
-        this.changeBannerById(this.formData)
-          .then(() => {
-            this.fetchBannerById(bannerId);
-            this.$notify({
-              group: 'foo',
-              type: 'success',
-              title: 'Твои изменения успешно внесены!',
-              text: 'Теперь мы будет следить за тобой.',
-            });
-            this.$router.push('/gacha-simulator/admin/banners');
-          })
-          .catch(() => {
-            this.$notify({
-              group: 'foo',
-              type: 'success',
-              title: 'Но вериться с трудом...',
-              text: 'Не переживай бусинка, попробуй ещё раз.',
-            });
-          });
+        this.changeBannerById(this.formData).then(() => this.redirectToList());
       } else {
-        this.createBanner(this.formData)
-          .then(() => {
-            this.$notify({
-              group: 'foo',
-              type: 'success',
-              title: 'Баннер успешно создан!',
-              text: 'Спасибо, за то что радуешь игроков.',
-            });
-            this.$router.push('/gacha-simulator/admin/banners');
-          })
-          .catch(() => {
-            this.$notify({
-              group: 'foo',
-              type: 'error',
-              title: 'Что-то пошло не так...',
-              text: 'Во время сохранения твоей информации произошла ошибка.',
-            });
-          });
+        this.createBanner(this.formData).then(() => this.redirectToList());
       }
+    },
+    redirectToList() {
+      this.$router.push('/gacha-simulator/admin/banners');
     },
     optionsCharacter(stars) {
       return this.characters
         .filter(({ rarity }) => Number(rarity) === Number(stars))
-        .map(characterData => ({
-          text: characterData.objKey,
-          value: characterData.objKey,
-        }));
+        .map(({ objKey }) => ({ text: objKey, value: objKey }));
     },
     addCharacter(stars) {
       this.formData.characters[stars].push('');
@@ -111,10 +76,7 @@ export default {
     optionsWeapon(stars) {
       return this.weapons
         .filter(({ rarity }) => Number(rarity) === Number(stars))
-        .map(weaponData => ({
-          text: weaponData.objKey,
-          value: weaponData.objKey,
-        }));
+        .map(({ objKey }) => ({ text: objKey, value: objKey }));
     },
     addWeapon(stars) {
       this.formData.weapons[stars].push('');

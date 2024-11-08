@@ -1,3 +1,4 @@
+
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
@@ -62,7 +63,7 @@ export default {
           this.$notify({
             group: 'foo',
             type: 'success',
-            title: 'Туда его!',
+            title: 'Удаление',
             text: 'Баннер успешно удалён.',
           });
         });

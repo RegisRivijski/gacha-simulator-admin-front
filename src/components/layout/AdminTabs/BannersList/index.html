@@ -1,101 +1,100 @@
 <template>
-  <div class="container mt-4 genshin-admin">
+    <div class="container mt-4 genshin-admin">
 
-    <div class="alert alert-info" role="alert">
-      <p>
-        Для более подробной информации о текущих активных банерах, доступных в игре Genshin Impact, рекомендуется
-        воспользоваться данным <a href="https://genshin-impact.fandom.com/wiki/Wish" target="_blank">ресурсом</a>.
-      </p>
-      <p>
-        Здесь вы найдете списки персонажей и оружия, которые доступны в каждом банере, а также их названия на разных языках.
-        Пожалуйста, сверяйте эту информацию при редактировании банеров.
-      </p>
-    </div>
-
-    <div class="mb-3">
-      <b-button pill variant="success" @click="addBanner">Добавить новый баннер</b-button>
-    </div>
-
-    <b-form class="mb-3">
-      <b-row>
-        <b-col md="3">
-          <b-form-group label="Поиск по Object Key:" label-for="filterObjKey">
-            <b-form-input v-model="filterObjKey" id="filterObjKey"></b-form-input>
-          </b-form-group>
-        </b-col>
-        <b-col md="3">
-          <b-form-group label="Статус активации:" label-for="filterIsActive">
-            <b-form-select v-model="filterIsActive" :options="filterIsActiveOptions" id="filterIsActive"></b-form-select>
-          </b-form-group>
-        </b-col>
-        <b-col md="3">
-          <b-form-group label="Type:" label-for="filterType">
-            <b-form-select v-model="filterType" :options="filterTypeOptions" id="filterType"></b-form-select>
-          </b-form-group>
-        </b-col>
-        <b-col md="3">
-          <b-form-group label="Category:" label-for="filterCategory">
-            <b-form-select v-model="filterCategory" :options="filterCategoryOptions" id="filterCategory"></b-form-select>
-          </b-form-group>
-        </b-col>
-      </b-row>
-    </b-form>
-
-    <!-- Список баннеров -->
-    <b-card v-for="data in filteredBanners" :key="data._id.$oid" class="genshin-card">
-      <b-card-header class="genshin-card-header d-flex justify-content-between">
-        <div>
-          <h5 class="card-title">{{ data.objKey }}</h5>
+        <div class="alert alert-info" role="alert">
+            <p>
+                Для более подробной информации о текущих активных банерах, доступных в игре Genshin Impact, воспользуйтесь
+                данным <a href="https://genshin-impact.fandom.com/wiki/Wish" target="_blank">ресурсом</a>.
+            </p>
         </div>
-        <div class="d-flex flex-column flex-md-row">
-          <b-button pill variant="info" @click="editBanner(data)">Редактировать</b-button>
-          <b-button pill variant="danger" @click="deleteBanner(data)">Удалить</b-button>
-          <b-button pill :variant="data.isActive ? 'warning' : 'success'" @click="toggleActivation(data)">
-            {{ data.isActive ? 'Деактивировать' : 'Активировать' }}
-          </b-button>
-        </div>
-      </b-card-header>
 
-      <b-card-body class="genshin-card-body">
-        <b-row>
-          <b-col md="6">
-            <ul class="list-group">
-              <li class="list-group-item genshin-list-item"><strong>ID:</strong> {{ data._id }}</li>
-              <li class="list-group-item genshin-list-item"><strong>Is Active:</strong> {{ data.isActive }}</li>
-              <li class="list-group-item genshin-list-item"><strong>Type:</strong> {{ data.type }}</li>
-              <li class="list-group-item genshin-list-item"><strong>Category:</strong> {{ data.category }}</li>
-              <li class="list-group-item genshin-list-item"><strong>Object Key:</strong> {{ data.objKey }}</li>
-            </ul>
-          </b-col>
-          <b-col md="6">
-            <ul class="list-group">
-              <li class="list-group-item genshin-list-item"><strong>Translations:</strong>
-                <ul class="genshin-sub-list">
-                  <li><strong>en:</strong> {{ data.translates.en }}</li>
-                  <li><strong>id:</strong> {{ data.translates.id }}</li>
-                  <li><strong>ko:</strong> {{ data.translates.ko }}</li>
-                  <li><strong>ru:</strong> {{ data.translates.ru }}</li>
-                  <li><strong>zh-hans:</strong> {{ data.translates['zh-hans'] }}</li>
-                </ul>
-              </li>
-              <li v-if="data.characters" class="list-group-item genshin-list-item"><strong>Characters:</strong>
-                <ul class="genshin-sub-list">
-                  <li v-for="(characters, stars) in data.characters" :key="stars">
-                    <strong>{{ stars }}-star:</strong> {{ characters.join(', ') }}
-                  </li>
-                </ul>
-              </li>
-              <li v-if="data.weapons" class="list-group-item genshin-list-item"><strong>Weapons:</strong>
-                <ul class="genshin-sub-list">
-                  <li v-for="(weapons, stars) in data.weapons" :key="stars">
-                    <strong>{{ stars }}-star:</strong> {{ weapons.join(', ') }}
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </b-col>
-        </b-row>
-      </b-card-body>
-    </b-card>
-  </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="text-white">Администрирование баннеров</h2>
+            <b-button pill variant="success" @click="addBanner">
+                <i class="fas fa-plus-circle"></i> Добавить баннер
+            </b-button>
+        </div>
+
+        <b-form class="mb-3 sticky-filter">
+            <b-row>
+                <!-- Добавлены иконки к полям фильтров для улучшения UX -->
+                <b-col md="3">
+                    <b-form-group label="Поиск по ключу:" label-for="filterObjKey">
+                        <b-input-group>
+                            <b-input-group-prepend><i class="fas fa-search"></i></b-input-group-prepend>
+                            <b-form-input v-model="filterObjKey" id="filterObjKey" placeholder="Введите ключ"></b-form-input>
+                        </b-input-group>
+                    </b-form-group>
+                </b-col>
+                <b-col md="3">
+                    <b-form-group label="Статус активации:" label-for="filterIsActive">
+                        <b-form-select v-model="filterIsActive" :options="filterIsActiveOptions" id="filterIsActive"></b-form-select>
+                    </b-form-group>
+                </b-col>
+                <b-col md="3">
+                    <b-form-group label="Тип баннера:" label-for="filterType">
+                        <b-form-select v-model="filterType" :options="filterTypeOptions" id="filterType"></b-form-select>
+                    </b-form-group>
+                </b-col>
+                <b-col md="3">
+                    <b-form-group label="Категория:" label-for="filterCategory">
+                        <b-form-select v-model="filterCategory" :options="filterCategoryOptions" id="filterCategory"></b-form-select>
+                    </b-form-group>
+                </b-col>
+            </b-row>
+        </b-form>
+
+        <!-- Список баннеров -->
+        <b-card v-for="data in filteredBanners" :key="data._id.$oid" class="genshin-card">
+            <b-card-header class="genshin-card-header">
+                <div>
+                    <h5 class="card-title">{{ data.objKey }}</h5>
+                    <small class="text-muted">{{ data.type }} | {{ data.category }}</small>
+                </div>
+                <div class="d-flex flex-column flex-md-row mt-2">
+                    <b-button pill variant="info" @click="editBanner(data)" class="genshin-button">
+                        <i class="fas fa-edit"></i> Редактировать
+                    </b-button>
+                    <b-button pill variant="danger" @click="deleteBanner(data)" class="genshin-button">
+                        <i class="fas fa-trash-alt"></i> Удалить
+                    </b-button>
+                    <b-button pill :variant="data.isActive ? 'warning' : 'success'" @click="toggleActivation(data)" class="genshin-button">
+                        <i :class="data.isActive ? 'fas fa-pause' : 'fas fa-play'"></i> {{ data.isActive ? 'Деактивировать' : 'Активировать' }}
+                    </b-button>
+                </div>
+            </b-card-header>
+
+            <b-card-body class="genshin-card-body">
+                <b-row>
+                    <b-col md="6">
+                        <ul class="list-group">
+                            <li class="list-group-item genshin-list-item"><strong>ID:</strong> {{ data._id }}</li>
+                            <li class="list-group-item genshin-list-item"><strong>Активен:</strong> {{ data.isActive ? 'Да' : 'Нет' }}</li>
+                            <li class="list-group-item genshin-list-item"><strong>Ключ:</strong> {{ data.objKey }}</li>
+                        </ul>
+                    </b-col>
+                    <b-col md="6">
+                        <b-collapse v-model="data.expanded">
+                            <ul class="list-group">
+                                <li class="list-group-item genshin-list-item"><strong>Персонажи:</strong>
+                                    <ul class="genshin-sub-list">
+                                        <li v-for="(characters, stars) in data.characters" :key="stars">
+                                            <strong>{{ stars }}-звёздные:</strong> {{ characters.join(', ') }}
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="list-group-item genshin-list-item"><strong>Оружие:</strong>
+                                    <ul class="genshin-sub-list">
+                                        <li v-for="(weapons, stars) in data.weapons" :key="stars">
+                                            <strong>{{ stars }}-звёздные:</strong> {{ weapons.join(', ') }}
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </b-collapse>
+                    </b-col>
+                </b-row>
+            </b-card-body>
+        </b-card>
+    </div>
 </template>

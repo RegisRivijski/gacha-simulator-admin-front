@@ -1,30 +1,35 @@
 .genshin-card {
     margin-bottom: 20px;
-    background-color: #3b3d40;
-    border: none;
+    background-color: #2f3136;
+    color: #f0f1f2;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .genshin-card-header {
-    background-color: #2d2d2d;
-    border-bottom: 1px solid #6c757d;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.genshin-card-body {
-    padding: 20px;
+    background-color: #23272a;
+    padding: 15px;
 }
 
 .genshin-list-item {
-    background-color: #3b3d40;
+    background-color: #2f3136;
     border: none;
+    color: #f0f1f2;
 }
 
 .genshin-sub-list {
     padding-left: 20px;
 }
 
+.sticky-filter {
+    position: sticky;
+    top: 0;
+    background-color: #2f3136;
+    z-index: 10;
+    padding: 10px 0;
+}
+
 .genshin-button {
-    margin-right: 10px;
+    margin: 5px 10px 0 0;
+    font-size: 0.9em;
 }
