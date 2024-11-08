@@ -2,7 +2,9 @@
     <div class="advertisements-view">
         <b-container>
             <div class="alert alert-warning" role="alert">
-                <p>Если возникли проблемы с отображением элементов на странице - отключите AdBlocker.</p>
+                <p>
+                    Если возникли проблемы с отображением элементов на странице - отключите AdBlocker.
+                </p>
             </div>
 
             <h2 class="genshin-heading">Управление рекламными постами</h2>
@@ -14,30 +16,38 @@
             <b-row>
                 <b-col v-for="advertisement in allAdvertisements" :key="advertisement._id" md="4">
                     <b-card class="advertisement-card">
-                        <b-card-title class="advertisement-card-title">
-                            {{ truncateText(advertisement.message, 70) }}
-                        </b-card-title>
-                        <b-card-text class="advertisement-card-text">
-                            <p v-if="advertisement.imageLink">
-                                <a target="_blank" :href="advertisement.imageLink">Ссылка на изображение</a>
-                            </p>
-                            <p><span :class="badgeClass(advertisement.groups)">Группы:</span> {{ advertisement.groups ? 'Да' : 'Нет' }}</p>
-                            <p><span :class="badgeClass(advertisement.users)">Пользователи:</span> {{ advertisement.users ? 'Да' : 'Нет' }}</p>
-                            <p><span :class="badgeClass(advertisement.delivered)">Отправлено:</span> {{ advertisement.delivered ? 'Да' : 'Нет' }}</p>
-                            <p>Отправить после: {{ formatLocalTime(advertisement.sendAfter) }}</p>
-                        </b-card-text>
-                        <div class="d-flex justify-content-between">
+                        <b-card-img
+                                v-if="advertisement.imageLink"
+                                :src="advertisement.imageLink"
+                                alt="Advertisement Image"
+                                class="advertisement-thumbnail"
+                        />
+                        <b-card-body>
+                            <b-card-title class="advertisement-card-title">{{ truncateText(advertisement.message, 70) }}</b-card-title>
+                            <b-card-text class="advertisement-card-text">
+                                <p v-if="Boolean(advertisement.imageLink)">
+                                    <a target="_blank" :href="advertisement.imageLink">Ссылка на изображение</a>
+                                </p>
+                                <p><b>Группы:</b> <b-badge variant="success">{{ advertisement.groups ? 'Да' : 'Нет' }}</b-badge></p>
+                                <p><b>Пользователи:</b> <b-badge variant="success">{{ advertisement.users ? 'Да' : 'Нет' }}</b-badge></p>
+                                <p><b>Отправлено:</b> <b-badge :variant="advertisement.delivered ? 'success' : 'danger'">{{ advertisement.delivered ? 'Да' : 'Нет' }}</b-badge></p>
+                                <p><b>Отправить после:</b> {{ formatLocalTime(advertisement.sendAfter) }}</p>
+                            </b-card-text>
+                            <b-button @click="previewAdvertisement(advertisement)" variant="primary" class="advertisement-button">Предпросмотр</b-button>
                             <b-button @click="editAdvertisement(advertisement)" variant="info" class="advertisement-button">Редактировать</b-button>
-                            <b-button @click="previewMessage(advertisement.message)" variant="primary" class="advertisement-button">Предпросмотр</b-button>
-                            <b-button @click="deleteAdvertisement(advertisement._id)" variant="danger" class="advertisement-button-delete">Удалить</b-button>
-                        </div>
+                            <b-button @click="deleteAdvertisement(advertisement._id)" variant="danger" class="advertisement-button advertisement-button-delete">Удалить</b-button>
+                        </b-card-body>
                     </b-card>
                 </b-col>
             </b-row>
-        </b-container>
 
-        <b-modal id="previewModal" title="Предпросмотр сообщения" hide-footer>
-            <p>{{ fullMessage }}</p>
-        </b-modal>
+            <!-- Modal for Preview -->
+            <b-modal v-model="showPreview" title="Предпросмотр сообщения">
+                <div v-if="selectedAdvertisement">
+                    <b-img v-if="selectedAdvertisement.imageLink" :src="selectedAdvertisement.imageLink" fluid alt="Advertisement Image" />
+                    <div v-html="compiledMessage"></div>
+                </div>
+            </b-modal>
+        </b-container>
     </div>
 </template>

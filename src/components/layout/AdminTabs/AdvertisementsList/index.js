@@ -4,13 +4,20 @@ export default {
   name: 'AdvertisementsList',
   data() {
     return {
-      fullMessage: '', // Для предпросмотра полного текста сообщения
+      showPreview: false,
+      selectedAdvertisement: null,
     };
   },
   computed: {
     ...mapGetters({
       allAdvertisements: 'advertisements/allAdv',
     }),
+    compiledMessage() {
+      if (this.selectedAdvertisement) {
+        return this.selectedAdvertisement.message; // Render HTML if message contains tags.
+      }
+      return '';
+    },
   },
   mounted() {
     this.fetchAllAdvertisements();
@@ -20,20 +27,23 @@ export default {
       fetchAllAdvertisements: 'advertisements/fetchAllAdv',
       deleteAdvertisementById: 'advertisements/deleteAdvById',
     }),
+    previewAdvertisement(advertisement) {
+      this.selectedAdvertisement = advertisement;
+      this.showPreview = true;
+    },
     editAdvertisement(advertisement) {
       this.$router.push(`/gacha-simulator/admin/advertisements/${advertisement._id}`);
     },
     deleteAdvertisement(advertisementId) {
-      this.deleteAdvertisementById(advertisementId)
-        .then(() => {
-          this.fetchAllAdvertisements();
-          this.$notify({
-            group: 'foo',
-            type: 'success',
-            title: 'Удаление успешно',
-            text: 'Реклама успешно удалена.',
-          });
+      this.deleteAdvertisementById(advertisementId).then(() => {
+        this.fetchAllAdvertisements();
+        this.$notify({
+          group: 'foo',
+          type: 'success',
+          title: 'Туда его!',
+          text: 'Реклама успешно удалена.',
         });
+      });
     },
     addNewAdvertisement() {
       this.$router.push('/gacha-simulator/admin/advertisements-add');
@@ -43,14 +53,10 @@ export default {
       return utcDate.toLocaleString();
     },
     truncateText(text, length) {
-      return text.length > length ? `${text.substring(0, length)}...` : text;
-    },
-    previewMessage(message) {
-      this.fullMessage = message;
-      this.$bvModal.show('previewModal');
-    },
-    badgeClass(status) {
-      return status ? 'badge badge-success' : 'badge badge-secondary';
+      if (text.length > length) {
+        return `${text.substring(0, length)}...`;
+      }
+      return text;
     },
   },
 };

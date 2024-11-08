@@ -3,46 +3,25 @@
     background-color: #2d2d2d;
     color: #fff;
 }
-
 .advertisement-card {
     margin-bottom: 20px;
     background-color: #3b3d40;
     border: none;
 }
-
 .advertisement-card-title {
     background-color: #2d2d2d;
     border-bottom: 1px solid #6c757d;
     padding: 10px;
     color: #fff;
 }
-
 .advertisement-card-text {
     padding: 20px;
 }
-
 .advertisement-button {
-    background-color: #2196F3;
-    color: #fff;
-    border: none;
-    margin-right: 5px;
+    margin-right: 10px;
 }
-
-.advertisement-button-delete {
-    background-color: #f44336;
-}
-
-.genshin-heading {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.badge-success {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.badge-secondary {
-    background-color: #6c757d;
-    color: #fff;
+.advertisement-thumbnail {
+    max-height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
 }
