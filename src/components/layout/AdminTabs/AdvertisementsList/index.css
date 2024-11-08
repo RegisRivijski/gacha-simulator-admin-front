@@ -4,35 +4,31 @@
     background-color: #2d2d2d;
     color: #fff;
 }
-.advertisement-card {
-    margin-bottom: 20px;
-    background-color: #3b3d40;
-    border: none;
-}
-.advertisement-card-title {
-    background-color: #2d2d2d;
-    border-bottom: 1px solid #6c757d;
-    padding: 10px;
-    color: #fff;
-}
-.advertisement-card-text {
-    padding: 20px;
-}
-.button-group {
+.advertisement-list {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
-.advertisement-button {
-    width: 100px; /* Uniform button width */
-    margin-right: 5px;
+.advertisement-item {
+    display: flex;
+    padding: 15px;
+    border-bottom: 1px solid #6c757d;
+    align-items: center;
 }
-.advertisement-thumbnail {
-    max-height: 150px;
-    object-fit: cover;
-    margin-bottom: 10px;
+.advertisement-image {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+}
+.advertisement-content {
+    flex-grow: 1;
+}
+.advertisement-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 .preview-message {
-    white-space: pre-wrap; /* Respect line breaks and spaces */
+    white-space: pre-wrap;
     word-wrap: break-word;
     padding: 10px;
     font-size: 14px;
