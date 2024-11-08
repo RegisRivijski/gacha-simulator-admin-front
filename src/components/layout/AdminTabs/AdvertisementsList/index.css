@@ -1,3 +1,4 @@
+
 .advertisements-view {
     padding: 20px;
     background-color: #2d2d2d;
@@ -17,11 +18,26 @@
 .advertisement-card-text {
     padding: 20px;
 }
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
 .advertisement-button {
-    margin-right: 10px;
+    width: 100px; /* Uniform button width */
+    margin-right: 5px;
 }
 .advertisement-thumbnail {
     max-height: 150px;
     object-fit: cover;
     margin-bottom: 10px;
+}
+.preview-message {
+    white-space: pre-wrap; /* Respect line breaks and spaces */
+    word-wrap: break-word;
+    padding: 10px;
+    font-size: 14px;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    border-radius: 5px;
+    color: #333;
 }

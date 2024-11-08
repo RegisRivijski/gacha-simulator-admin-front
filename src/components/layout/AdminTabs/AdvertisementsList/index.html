@@ -33,19 +33,21 @@
                                 <p><b>Отправлено:</b> <b-badge :variant="advertisement.delivered ? 'success' : 'danger'">{{ advertisement.delivered ? 'Да' : 'Нет' }}</b-badge></p>
                                 <p><b>Отправить после:</b> {{ formatLocalTime(advertisement.sendAfter) }}</p>
                             </b-card-text>
-                            <b-button @click="previewAdvertisement(advertisement)" variant="primary" class="advertisement-button">Предпросмотр</b-button>
-                            <b-button @click="editAdvertisement(advertisement)" variant="info" class="advertisement-button">Редактировать</b-button>
-                            <b-button @click="deleteAdvertisement(advertisement._id)" variant="danger" class="advertisement-button advertisement-button-delete">Удалить</b-button>
+                            <div class="button-group">
+                                <b-button @click="previewAdvertisement(advertisement)" variant="primary" class="advertisement-button">Предпросмотр</b-button>
+                                <b-button @click="editAdvertisement(advertisement)" variant="info" class="advertisement-button">Редактировать</b-button>
+                                <b-button @click="deleteAdvertisement(advertisement._id)" variant="danger" class="advertisement-button advertisement-button-delete">Удалить</b-button>
+                            </div>
                         </b-card-body>
                     </b-card>
                 </b-col>
             </b-row>
 
             <!-- Modal for Preview -->
-            <b-modal v-model="showPreview" title="Предпросмотр сообщения">
+            <b-modal v-model="showPreview" title="Предпросмотр сообщения" hide-footer>
                 <div v-if="selectedAdvertisement">
                     <b-img v-if="selectedAdvertisement.imageLink" :src="selectedAdvertisement.imageLink" fluid alt="Advertisement Image" />
-                    <div v-html="compiledMessage"></div>
+                    <pre class="preview-message" v-html="compiledMessage"></pre>
                 </div>
             </b-modal>
         </b-container>
