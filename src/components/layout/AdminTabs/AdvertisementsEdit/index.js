@@ -19,7 +19,6 @@ export default {
         message: '',
         groups: true,
         users: true,
-        defaultLangCode: '',
         delivered: false,
         sendAfter: '',
       });
@@ -43,18 +42,17 @@ export default {
             this.$notify({
               group: 'foo',
               type: 'success',
-              title: 'Твои изменения успешно внесены!',
+              title: 'Изменения успешно сохранены!',
               text: 'Теперь мы будет следить за тобой.',
             });
-
             this.$router.push('/gacha-simulator/admin/advertisements');
           })
           .catch(() => {
             this.$notify({
               group: 'foo',
-              type: 'success',
-              title: 'Но вериться с трудом...',
-              text: 'Не переживай бусинка, попробуй ещё раз.',
+              type: 'error',
+              title: 'Что-то пошло не так...',
+              text: 'Попробуйте снова.',
             });
           });
       } else {
@@ -66,15 +64,14 @@ export default {
               title: 'Реклама успешно создана!',
               text: 'Спасибо, за то что злишь игроков.',
             });
-
             this.$router.push('/gacha-simulator/admin/advertisements');
           })
           .catch(() => {
             this.$notify({
               group: 'foo',
               type: 'error',
-              title: 'Что-то пошло не так...',
-              text: 'Во время сохранения твоей информации произошла ошибка.',
+              title: 'Ошибка!',
+              text: 'Во время сохранения произошла ошибка.',
             });
           });
       }

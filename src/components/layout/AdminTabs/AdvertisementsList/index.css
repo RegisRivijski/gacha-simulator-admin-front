@@ -1,46 +1,48 @@
-/* Стили для общего контейнера рекламных постов */
 .advertisements-view {
     padding: 20px;
     background-color: #2d2d2d;
     color: #fff;
 }
 
-/* Стили для карточек рекламных постов */
 .advertisement-card {
     margin-bottom: 20px;
     background-color: #3b3d40;
     border: none;
 }
 
-/* Стили для заголовка карточек */
 .advertisement-card-title {
     background-color: #2d2d2d;
     border-bottom: 1px solid #6c757d;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 10px;
     color: #fff;
 }
 
-/* Стили для текста в карточках */
 .advertisement-card-text {
     padding: 20px;
 }
 
-/* Стили для кнопок редактирования и удаления рекламных постов */
 .advertisement-button {
-    margin-right: 10px;
     background-color: #2196F3;
     color: #fff;
     border: none;
+    margin-right: 5px;
 }
 
-/* Стили для кнопки удаления рекламного поста */
 .advertisement-button-delete {
     background-color: #f44336;
 }
+
 .genshin-heading {
     font-size: 24px;
     margin-bottom: 20px;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.badge-secondary {
+    background-color: #6c757d;
+    color: #fff;
 }

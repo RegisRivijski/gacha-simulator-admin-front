@@ -2,6 +2,8 @@
     <div class="edit-advertisement-form container mt-4">
         <b-container>
             <b-form @submit.prevent="handleSubmit">
+
+                <!-- Ссылка на изображение -->
                 <b-form-group label="Ссылка на изображение:" label-for="image-link-input">
                     <b-form-input
                             id="image-link-input"
@@ -10,6 +12,7 @@
                     ></b-form-input>
                 </b-form-group>
 
+                <!-- Текст сообщения -->
                 <b-form-group label="Текст сообщения:" label-for="message-textarea">
                     <b-form-textarea
                             id="message-textarea"
@@ -19,21 +22,18 @@
                     ></b-form-textarea>
                 </b-form-group>
 
+                <!-- Отправка пользователям и группам -->
                 <b-form-group>
-                    <b-form-checkbox v-model="formData.groups">
-                        Отправить группам
-                    </b-form-checkbox>
-                    <b-form-checkbox v-model="formData.users">
-                        Отправить пользователям
-                    </b-form-checkbox>
+                    <b-form-checkbox v-model="formData.groups">Отправить группам</b-form-checkbox>
+                    <b-form-checkbox v-model="formData.users">Отправить пользователям</b-form-checkbox>
                 </b-form-group>
 
+                <!-- Статус доставки рекламы -->
                 <b-form-group>
-                    <b-form-checkbox v-model="formData.delivered">
-                        Реклама доставлена
-                    </b-form-checkbox>
+                    <b-form-checkbox v-model="formData.delivered">Реклама доставлена</b-form-checkbox>
                 </b-form-group>
 
+                <!-- Время отправки -->
                 <b-form-group label="Отправить после:" label-for="send-after-input">
                     <b-form-input
                             id="send-after-input"
@@ -42,6 +42,7 @@
                     ></b-form-input>
                 </b-form-group>
 
+                <!-- Кнопка сохранения изменений -->
                 <b-button type="submit" variant="primary">Сохранить изменения</b-button>
             </b-form>
         </b-container>

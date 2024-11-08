@@ -21,6 +21,12 @@ export default {
     editPromocode(promocode) {
       this.$router.push(`/gacha-simulator/admin/promocodes/${promocode._id}`);
     },
+    confirmDelete(promocodeId) {
+      // eslint-disable-next-line no-restricted-globals
+      if (confirm('Вы уверены, что хотите удалить этот промокод?')) {
+        this.deletePromocode(promocodeId);
+      }
+    },
     deletePromocode(promocodeId) {
       this.deletePromocodeById(promocodeId)
         .then(() => {
@@ -28,7 +34,7 @@ export default {
           this.$notify({
             group: 'foo',
             type: 'success',
-            title: 'Туда его!',
+            title: 'Удалено',
             text: 'Промокод успешно удалён.',
           });
         });
@@ -38,7 +44,13 @@ export default {
     },
     formatLocalTime(utcTimeString) {
       const utcDate = new Date(utcTimeString);
-      return utcDate.toLocaleString();
+      return utcDate.toLocaleDateString('ru-RU', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
     },
   },
 };

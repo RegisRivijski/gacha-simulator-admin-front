@@ -1,4 +1,4 @@
-.genshin-form {
+.edit-advertisement-form {
     background-color: #2d2d2d;
     padding: 20px;
     border-radius: 10px;
@@ -6,17 +6,7 @@
     color: #fff;
 }
 
-.genshin-form-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.genshin-form-header h2 {
+.genshin-heading {
     font-size: 24px;
-    margin-bottom: 5px;
-}
-
-.genshin-form-header p {
-    font-size: 14px;
-    opacity: 0.8;
+    margin-bottom: 20px;
 }

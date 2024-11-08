@@ -19,7 +19,7 @@ export default {
         primogems: 0,
         stardust: 0,
         starglitter: 0,
-        count: 0,
+        count: 1, // Минимальное значение для предотвращения ошибок
       });
     }
   },
@@ -37,22 +37,20 @@ export default {
       if (promocodeId) {
         this.changePromocodeById(this.formData)
           .then(() => {
-            this.fetchPromocodesById(promocodeId);
             this.$notify({
               group: 'foo',
               type: 'success',
-              title: 'Твои изменения успешно внесены!',
-              text: 'Теперь мы будет следить за тобой.',
+              title: 'Изменения сохранены!',
+              text: 'Промокод успешно обновлён.',
             });
-
             this.$router.push('/gacha-simulator/admin/promocodes');
           })
           .catch(() => {
             this.$notify({
               group: 'foo',
-              type: 'success',
-              title: 'Но вериться с трудом...',
-              text: 'Не переживай бусинка, попробуй ещё раз.',
+              type: 'error',
+              title: 'Ошибка',
+              text: 'Попробуйте ещё раз.',
             });
           });
       } else {
@@ -61,18 +59,17 @@ export default {
             this.$notify({
               group: 'foo',
               type: 'success',
-              title: 'Баннер успешно создан!',
-              text: 'Спасибо, за то что радуешь игроков.',
+              title: 'Промокод создан!',
+              text: 'Промокод добавлен успешно.',
             });
-
             this.$router.push('/gacha-simulator/admin/promocodes');
           })
           .catch(() => {
             this.$notify({
               group: 'foo',
               type: 'error',
-              title: 'Что-то пошло не так...',
-              text: 'Во время сохранения твоей информации произошла ошибка.',
+              title: 'Ошибка',
+              text: 'Произошла ошибка при сохранении промокода.',
             });
           });
       }

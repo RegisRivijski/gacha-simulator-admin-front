@@ -1,11 +1,8 @@
 <template>
     <div class="advertisements-view">
         <b-container>
-
             <div class="alert alert-warning" role="alert">
-                <p>
-                    Если возникли проблемы с отображением элементов на странице - отключите AddBlocker.
-                </p>
+                <p>Если возникли проблемы с отображением элементов на странице - отключите AdBlocker.</p>
             </div>
 
             <h2 class="genshin-heading">Управление рекламными постами</h2>
@@ -17,21 +14,30 @@
             <b-row>
                 <b-col v-for="advertisement in allAdvertisements" :key="advertisement._id" md="4">
                     <b-card class="advertisement-card">
-                        <b-card-title class="advertisement-card-title">{{ truncateText(advertisement.message, 70) }}</b-card-title>
+                        <b-card-title class="advertisement-card-title">
+                            {{ truncateText(advertisement.message, 70) }}
+                        </b-card-title>
                         <b-card-text class="advertisement-card-text">
-                            <p v-if="Boolean(advertisement.imageLink)" >
+                            <p v-if="advertisement.imageLink">
                                 <a target="_blank" :href="advertisement.imageLink">Ссылка на изображение</a>
                             </p>
-                            <p>Группы: {{ advertisement.groups ? 'Да' : 'Нет' }}</p>
-                            <p>Пользователи: {{ advertisement.users ? 'Да' : 'Нет' }}</p>
-                            <p>Отправлено: {{ advertisement.delivered ? 'Да' : 'Нет' }}</p>
+                            <p><span :class="badgeClass(advertisement.groups)">Группы:</span> {{ advertisement.groups ? 'Да' : 'Нет' }}</p>
+                            <p><span :class="badgeClass(advertisement.users)">Пользователи:</span> {{ advertisement.users ? 'Да' : 'Нет' }}</p>
+                            <p><span :class="badgeClass(advertisement.delivered)">Отправлено:</span> {{ advertisement.delivered ? 'Да' : 'Нет' }}</p>
                             <p>Отправить после: {{ formatLocalTime(advertisement.sendAfter) }}</p>
                         </b-card-text>
-                        <b-button @click="editAdvertisement(advertisement)" variant="info" class="advertisement-button">Редактировать</b-button>
-                        <b-button @click="deleteAdvertisement(advertisement._id)" variant="danger" class="advertisement-button advertisement-button-delete">Удалить</b-button>
+                        <div class="d-flex justify-content-between">
+                            <b-button @click="editAdvertisement(advertisement)" variant="info" class="advertisement-button">Редактировать</b-button>
+                            <b-button @click="previewMessage(advertisement.message)" variant="primary" class="advertisement-button">Предпросмотр</b-button>
+                            <b-button @click="deleteAdvertisement(advertisement._id)" variant="danger" class="advertisement-button-delete">Удалить</b-button>
+                        </div>
                     </b-card>
                 </b-col>
             </b-row>
         </b-container>
+
+        <b-modal id="previewModal" title="Предпросмотр сообщения" hide-footer>
+            <p>{{ fullMessage }}</p>
+        </b-modal>
     </div>
 </template>

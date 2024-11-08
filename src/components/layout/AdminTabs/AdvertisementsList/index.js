@@ -3,7 +3,9 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'AdvertisementsList',
   data() {
-    return {};
+    return {
+      fullMessage: '', // Для предпросмотра полного текста сообщения
+    };
   },
   computed: {
     ...mapGetters({
@@ -28,7 +30,7 @@ export default {
           this.$notify({
             group: 'foo',
             type: 'success',
-            title: 'Туда его!',
+            title: 'Удаление успешно',
             text: 'Реклама успешно удалена.',
           });
         });
@@ -41,10 +43,14 @@ export default {
       return utcDate.toLocaleString();
     },
     truncateText(text, length) {
-      if (text.length > length) {
-        return `${text.substring(0, length)}...`;
-      }
-      return text;
+      return text.length > length ? `${text.substring(0, length)}...` : text;
+    },
+    previewMessage(message) {
+      this.fullMessage = message;
+      this.$bvModal.show('previewModal');
+    },
+    badgeClass(status) {
+      return status ? 'badge badge-success' : 'badge badge-secondary';
     },
   },
 };
