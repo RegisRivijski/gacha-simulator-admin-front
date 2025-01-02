@@ -1,66 +1,64 @@
-<template>
-    <div class="container mt-4 genshin-form">
-        <div class="genshin-form-header">
-            <h2>Создание/Редактирование Промокода</h2>
-            <p>Заполните все поля, чтобы создать или изменить существующий промокод.</p>
-        </div>
-
-        <b-form @submit.prevent="handleSubmit">
-            <b-form-group label="Промокод:" label-for="promocode">
-                <b-form-input
-                        required
-                        v-model="formData.promocode"
-                        id="promocode"
-                        type="text"
-                        placeholder="Введите промокод"
-                ></b-form-input>
-            </b-form-group>
-
-            <b-form-group label="Ресурсы, начисляемые игроку:" label-for="resources">
-                <small class="form-text text-muted">Камни истока</small>
-                <b-form-input
-                        v-model="formData.primogems"
-                        id="primoges"
-                        type="number"
-                        min="0"
-                        placeholder="Камни истока"
-                ></b-form-input>
-
-                <small class="form-text text-muted">Звёздная пыль</small>
-                <b-form-input
-                        v-model="formData.stardust"
-                        id="stardust"
-                        type="number"
-                        min="0"
-                        placeholder="Звёздная пыль"
-                ></b-form-input>
-
-                <small class="form-text text-muted">Звёздный блеск</small>
-                <b-form-input
-                        v-model="formData.starglitter"
-                        id="starglitter"
-                        type="number"
-                        min="0"
-                        placeholder="Звёздный блеск"
-                ></b-form-input>
-            </b-form-group>
-
-            <b-form-group label="Количество:" label-for="count">
-                <small class="form-text text-muted">
-                    Количество игроков, которые смогут использовать данный промокод
-                </small>
-                <b-form-input
-                        required
-                        v-model="formData.count"
-                        id="count"
-                        type="number"
-                        min="1"
-                ></b-form-input>
-            </b-form-group>
-
-            <b-button type="submit" variant="success">
-                <i class="fas fa-save"></i> Сохранить изменения
-            </b-button>
-        </b-form>
+<div class="container mt-4 genshin-form">
+    <div class="genshin-form-header">
+        <h2>Создание/Редактирование Промокода</h2>
+        <p>Заполните все поля, чтобы создать или изменить существующий промокод.</p>
     </div>
-</template>
+
+    <b-form @submit.prevent="handleSubmit">
+        <b-form-group label="Промокод:" label-for="promocode">
+            <b-form-input
+                    required
+                    v-model="formData.promocode"
+                    id="promocode"
+                    type="text"
+                    placeholder="Введите промокод"
+            ></b-form-input>
+        </b-form-group>
+
+        <b-form-group label="Ресурсы, начисляемые игроку:" label-for="resources">
+            <small class="form-text text-muted">Камни истока</small>
+            <b-form-input
+                    v-model="formData.primogems"
+                    id="primoges"
+                    type="number"
+                    min="0"
+                    placeholder="Камни истока"
+            ></b-form-input>
+
+            <small class="form-text text-muted">Звёздная пыль</small>
+            <b-form-input
+                    v-model="formData.stardust"
+                    id="stardust"
+                    type="number"
+                    min="0"
+                    placeholder="Звёздная пыль"
+            ></b-form-input>
+
+            <small class="form-text text-muted">Звёздный блеск</small>
+            <b-form-input
+                    v-model="formData.starglitter"
+                    id="starglitter"
+                    type="number"
+                    min="0"
+                    placeholder="Звёздный блеск"
+            ></b-form-input>
+        </b-form-group>
+
+        <b-form-group label="Количество:" label-for="count">
+            <small class="form-text text-muted">
+                Количество игроков, которые смогут использовать данный промокод
+            </small>
+            <b-form-input
+                    required
+                    v-model="formData.count"
+                    id="count"
+                    type="number"
+                    min="1"
+            ></b-form-input>
+        </b-form-group>
+
+        <b-button type="submit" variant="success">
+            <i class="fas fa-save"></i> Сохранить изменения
+        </b-button>
+    </b-form>
+</div>

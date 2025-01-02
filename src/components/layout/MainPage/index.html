@@ -1,23 +1,25 @@
-<template>
-  <div>
-    <nav class="nav-genshin">
-        <router-link class="nav-link" :to="{ name: 'banners' }">
-            <b-button pill variant="info" class="nav-button">
-                Баннера
-            </b-button>
-        </router-link>
-        <router-link class="nav-link" :to="{ name: 'promocodes' }">
-            <b-button pill variant="info" class="nav-button">
-                Промокоды
-            </b-button>
-        </router-link>
-        <router-link class="nav-link" :to="{ name: 'advertisements' }">
-            <b-button pill variant="info" class="nav-button">
-                Реклама
-            </b-button>
-        </router-link>
-      <!-- Добавьте другие вкладки по аналогии -->
-    </nav>
-    <router-view />
-  </div>
-</template>
+<div>
+<nav class="nav-genshin">
+    <router-link class="nav-link" :to="{ name: 'banners' }">
+        <b-button pill variant="info" class="nav-button">
+            Баннера
+        </b-button>
+    </router-link>
+    <router-link class="nav-link" :to="{ name: 'promocodes' }">
+        <b-button pill variant="info" class="nav-button">
+            Промокоды
+        </b-button>
+    </router-link>
+    <router-link class="nav-link" :to="{ name: 'advertisements' }">
+        <b-button pill variant="info" class="nav-button">
+            Реклама
+        </b-button>
+    </router-link>
+    <router-link class="nav-link" :to="{ name: 'shopItems' }">
+        <b-button pill variant="info" class="nav-button">
+            Магазин
+        </b-button>
+    </router-link>
+</nav>
+<router-view />
+</div>

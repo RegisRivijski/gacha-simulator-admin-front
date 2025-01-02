@@ -1,0 +1,55 @@
+<div class="shop-item-form">
+    <b-container>
+        <h2 class="genshin-heading">
+            {{ $route.params?.shopItemId ? 'Редактировать товар' : 'Добавить новый товар' }}
+        </h2>
+
+        <b-form @submit.prevent="handleSubmit">
+            <b-form-group label="Порядковый номер" label-for="order-input" description="Введите порядковый номер товара в списке.">
+                <b-form-input
+                        id="order-input"
+                        type="number"
+                        v-model="formData.order"
+                        required
+                        placeholder="Введите номер"
+                ></b-form-input>
+            </b-form-group>
+
+            <b-form-group label="Количество" label-for="count-input" description="Введите количество товара.">
+                <b-form-input
+                        id="count-input"
+                        type="number"
+                        v-model="formData.count"
+                        required
+                        placeholder="Введите количество"
+                ></b-form-input>
+            </b-form-group>
+
+            <b-form-group label="Тип валюты" label-for="currency-type-select" description="Выберите тип валюты.">
+                <b-form-select
+                        id="currency-type-select"
+                        v-model="formData.currencyType"
+                        :options="currencyOptions"
+                        required
+                ></b-form-select>
+            </b-form-group>
+
+            <b-form-group label="Стоимость" label-for="stars-cost-input" description="Введите стоимость товара.">
+                <b-form-input
+                        id="stars-cost-input"
+                        type="number"
+                        v-model="formData.starsCost"
+                        required
+                        placeholder="Введите стоимость"
+                ></b-form-input>
+            </b-form-group>
+
+            <b-button type="submit" variant="success">
+                <i class="fas fa-save"></i> Сохранить
+            </b-button>
+            <b-button @click="cancel" variant="secondary">
+                <i class="fas fa-arrow-left"></i> Отмена
+            </b-button>
+        </b-form>
+    </b-container>
+</div>

@@ -1,41 +1,39 @@
-<template>
-    <div class="promocodes-view">
-        <b-container>
-            <h2 class="genshin-heading">Управление промокодами</h2>
+<div class="promocodes-view">
+    <b-container>
+        <h2 class="genshin-heading">Управление промокодами</h2>
 
-            <div class="mb-3">
-                <b-button pill variant="success" @click="addNewPromocode">
-                    <i class="fas fa-plus"></i> Добавить новый промокод
-                </b-button>
-            </div>
+        <div class="mb-3">
+            <b-button pill variant="success" @click="addNewPromocode">
+                <i class="fas fa-plus"></i> Добавить новый промокод
+            </b-button>
+        </div>
 
-            <b-row>
-                <b-col v-for="promocode in allPromocodes" :key="promocode._id" md="4">
-                    <b-card class="promocode-card">
-                        <b-card-title class="promocode-card-title">
-                            {{ promocode.promocode }}
-                        </b-card-title>
-                        <b-card-text class="promocode-card-text">
-                            <ul class="promocode-details-list">
-                                <li><strong>Камни истока:</strong> {{ promocode.primogems }} ✦</li>
-                                <li><strong>Звёздная пыль:</strong> {{ promocode.stardust }} ☆</li>
-                                <li><strong>Звёздный блеск:</strong> {{ promocode.starglitter }} ✧</li>
-                                <li><strong>Количество:</strong> {{ promocode.count }}</li>
-                                <li><strong>Использовано:</strong> {{ promocode.chatIds.length }}</li>
-                                <li><strong>Дата создания:</strong> {{ formatLocalTime(promocode.created) }}</li>
-                            </ul>
-                        </b-card-text>
-                        <div class="promocode-buttons">
-                            <b-button @click="editPromocode(promocode)" variant="info" class="promocode-button">
-                                <i class="fas fa-edit"></i> Редактировать
-                            </b-button>
-                            <b-button @click="confirmDelete(promocode._id)" variant="danger" class="promocode-button promocode-button-delete">
-                                <i class="fas fa-trash-alt"></i> Удалить
-                            </b-button>
-                        </div>
-                    </b-card>
-                </b-col>
-            </b-row>
-        </b-container>
-    </div>
-</template>
+        <b-row>
+            <b-col v-for="promocode in allPromocodes" :key="promocode._id" md="4">
+                <b-card class="promocode-card">
+                    <b-card-title class="promocode-card-title">
+                        {{ promocode.promocode }}
+                    </b-card-title>
+                    <b-card-text class="promocode-card-text">
+                        <ul class="promocode-details-list">
+                            <li><strong>Камни истока:</strong> {{ promocode.primogems }} ✦</li>
+                            <li><strong>Звёздная пыль:</strong> {{ promocode.stardust }} ☆</li>
+                            <li><strong>Звёздный блеск:</strong> {{ promocode.starglitter }} ✧</li>
+                            <li><strong>Количество:</strong> {{ promocode.count }}</li>
+                            <li><strong>Использовано:</strong> {{ promocode.chatIds.length }}</li>
+                            <li><strong>Дата создания:</strong> {{ formatLocalTime(promocode.created) }}</li>
+                        </ul>
+                    </b-card-text>
+                    <div class="promocode-buttons">
+                        <b-button @click="editPromocode(promocode)" variant="info" class="promocode-button">
+                            <i class="fas fa-edit"></i> Редактировать
+                        </b-button>
+                        <b-button @click="confirmDelete(promocode._id)" variant="danger" class="promocode-button promocode-button-delete">
+                            <i class="fas fa-trash-alt"></i> Удалить
+                        </b-button>
+                    </div>
+                </b-card>
+            </b-col>
+        </b-row>
+    </b-container>
+</div>

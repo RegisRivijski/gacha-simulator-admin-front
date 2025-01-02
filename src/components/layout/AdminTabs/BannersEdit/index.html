@@ -1,87 +1,85 @@
-<template>
-    <div class="container mt-4 genshin-form">
-        <div class="genshin-form-header">
-            <h2>Редактировать Баннер</h2>
-            <p>Заполните информацию о баннере и сохраните изменения.</p>
-        </div>
-
-        <b-form @submit.prevent="handleSubmit">
-            <b-form-group label="Статус активации:" label-for="isActive">
-                <b-form-select v-model="formData.isActive" id="isActive">
-                    <option :value="true">Активный</option>
-                    <option :value="false">Неактивный</option>
-                </b-form-select>
-            </b-form-group>
-
-            <b-form-group label="Тип баннера:" label-for="type">
-                <b-form-select v-model="formData.type" id="type">
-                    <option value="character">Баннер Персонажей</option>
-                    <option value="weapon">Баннер Оружия</option>
-                </b-form-select>
-            </b-form-group>
-
-            <b-form-group label="Категория:" label-for="category">
-                <b-form-select v-model="formData.category" id="category">
-                    <option value="event">Игровой</option>
-                    <option value="universal">Универсальный</option>
-                </b-form-select>
-            </b-form-group>
-
-            <b-form-group label="Object Key:" label-for="objKey">
-                <b-form-input
-                        required
-                        v-model="formData.objKey"
-                        id="objKey"
-                        type="text"
-                        placeholder="Введите ключ объекта"
-                ></b-form-input>
-                <small class="form-text text-muted">
-                    Убедитесь, что "Object Key" совпадает с английским переводом для соответствия стандартам.
-                </small>
-            </b-form-group>
-
-            <b-form-group label="Переводы:" label-for="translations">
-                <div class="translations-group">
-                    <b-form-input
-                            v-for="(value, key) in formData.translates"
-                            :key="key"
-                            v-model="formData.translates[key]"
-                            :id="key"
-                            :placeholder="key"
-                            class="mb-2"
-                    ></b-form-input>
-                </div>
-            </b-form-group>
-
-            <b-form-group label="Персонажи:" label-for="characters">
-                <div v-for="(characters, stars) in formData.characters" :key="stars">
-                    <b-form-group :label="`${stars} Звезды`">
-                        <div v-if="characters.length > 0">
-                            <div v-for="(character, index) in characters" :key="index" class="d-flex mb-2 align-items-center">
-                                <b-form-select v-model="characters[index]" :options="optionsCharacter(stars)" class="mr-2"></b-form-select>
-                                <b-button @click="removeCharacter(stars, index)" variant="danger" class="ml-2">Удалить</b-button>
-                            </div>
-                        </div>
-                        <b-button @click="addCharacter(stars)" variant="primary" class="mt-2">Добавить персонажа</b-button>
-                    </b-form-group>
-                </div>
-            </b-form-group>
-
-            <b-form-group label="Оружие:" label-for="weapons">
-                <div v-for="(weapons, stars) in formData.weapons" :key="stars">
-                    <b-form-group :label="`${stars} Звезды`">
-                        <div v-if="weapons.length > 0">
-                            <div v-for="(weapon, index) in weapons" :key="index" class="d-flex mb-2 align-items-center">
-                                <b-form-select v-model="weapons[index]" :options="optionsWeapon(stars)" class="mr-2"></b-form-select>
-                                <b-button @click="removeWeapon(stars, index)" variant="danger" class="ml-2">Удалить</b-button>
-                            </div>
-                        </div>
-                        <b-button @click="addWeapon(stars)" variant="primary" class="mt-2">Добавить оружие</b-button>
-                    </b-form-group>
-                </div>
-            </b-form-group>
-
-            <b-button type="submit" variant="success">Сохранить изменения</b-button>
-        </b-form>
+<div class="container mt-4 genshin-form">
+    <div class="genshin-form-header">
+        <h2>Редактировать Баннер</h2>
+        <p>Заполните информацию о баннере и сохраните изменения.</p>
     </div>
-</template>
+
+    <b-form @submit.prevent="handleSubmit">
+        <b-form-group label="Статус активации:" label-for="isActive">
+            <b-form-select v-model="formData.isActive" id="isActive">
+                <option :value="true">Активный</option>
+                <option :value="false">Неактивный</option>
+            </b-form-select>
+        </b-form-group>
+
+        <b-form-group label="Тип баннера:" label-for="type">
+            <b-form-select v-model="formData.type" id="type">
+                <option value="character">Баннер Персонажей</option>
+                <option value="weapon">Баннер Оружия</option>
+            </b-form-select>
+        </b-form-group>
+
+        <b-form-group label="Категория:" label-for="category">
+            <b-form-select v-model="formData.category" id="category">
+                <option value="event">Игровой</option>
+                <option value="universal">Универсальный</option>
+            </b-form-select>
+        </b-form-group>
+
+        <b-form-group label="Object Key:" label-for="objKey">
+            <b-form-input
+                    required
+                    v-model="formData.objKey"
+                    id="objKey"
+                    type="text"
+                    placeholder="Введите ключ объекта"
+            ></b-form-input>
+            <small class="form-text text-muted">
+                Убедитесь, что "Object Key" совпадает с английским переводом для соответствия стандартам.
+            </small>
+        </b-form-group>
+
+        <b-form-group label="Переводы:" label-for="translations">
+            <div class="translations-group">
+                <b-form-input
+                        v-for="(value, key) in formData.translates"
+                        :key="key"
+                        v-model="formData.translates[key]"
+                        :id="key"
+                        :placeholder="key"
+                        class="mb-2"
+                ></b-form-input>
+            </div>
+        </b-form-group>
+
+        <b-form-group label="Персонажи:" label-for="characters">
+            <div v-for="(characters, stars) in formData.characters" :key="stars">
+                <b-form-group :label="`${stars} Звезды`">
+                    <div v-if="characters.length > 0">
+                        <div v-for="(character, index) in characters" :key="index" class="d-flex mb-2 align-items-center">
+                            <b-form-select v-model="characters[index]" :options="optionsCharacter(stars)" class="mr-2"></b-form-select>
+                            <b-button @click="removeCharacter(stars, index)" variant="danger" class="ml-2">Удалить</b-button>
+                        </div>
+                    </div>
+                    <b-button @click="addCharacter(stars)" variant="primary" class="mt-2">Добавить персонажа</b-button>
+                </b-form-group>
+            </div>
+        </b-form-group>
+
+        <b-form-group label="Оружие:" label-for="weapons">
+            <div v-for="(weapons, stars) in formData.weapons" :key="stars">
+                <b-form-group :label="`${stars} Звезды`">
+                    <div v-if="weapons.length > 0">
+                        <div v-for="(weapon, index) in weapons" :key="index" class="d-flex mb-2 align-items-center">
+                            <b-form-select v-model="weapons[index]" :options="optionsWeapon(stars)" class="mr-2"></b-form-select>
+                            <b-button @click="removeWeapon(stars, index)" variant="danger" class="ml-2">Удалить</b-button>
+                        </div>
+                    </div>
+                    <b-button @click="addWeapon(stars)" variant="primary" class="mt-2">Добавить оружие</b-button>
+                </b-form-group>
+            </div>
+        </b-form-group>
+
+        <b-button type="submit" variant="success">Сохранить изменения</b-button>
+    </b-form>
+</div>

@@ -1,0 +1,52 @@
+.shop-items-view {
+    padding: 20px;
+    background-color: #2d2d2d;
+    color: #fff;
+}
+
+.shop-item-card {
+    margin-bottom: 20px;
+    background-color: #3b3d40;
+    border: none;
+}
+
+.shop-item-card-title {
+    background-color: #2d2d2d;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.shop-item-card-text {
+    padding: 20px;
+}
+
+.shop-item-details-list {
+    list-style: none;
+    padding: 0;
+    color: #d3d3d3;
+}
+
+.shop-item-details-list li {
+    margin-bottom: 5px;
+}
+
+.shop-item-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.shop-item-button {
+    margin-right: 10px;
+}
+
+.shop-item-button-delete {
+    background-color: #f44336;
+}
+
+.genshin-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+}

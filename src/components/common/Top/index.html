@@ -1,9 +1,7 @@
-<template>
-  <div class="admin-header" v-if="isLogged">
+<div class="admin-header" v-if="isLogged">
     <div class="admin-title">Genshin Admin</div>
     <div class="user-info">
       <div class="username">{{ adminName }}</div>
       <b-button variant="danger" @click="exit()">Выход</b-button>
     </div>
-  </div>
-</template>
+</div>

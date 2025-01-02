@@ -1,0 +1,38 @@
+<div class="shop-items-view">
+    <b-container>
+        <h2 class="genshin-heading">Управление товарами магазина</h2>
+
+        <div class="mb-3">
+            <b-button pill variant="success" @click="addNewShopItem">
+                <i class="fas fa-plus"></i> Добавить новый товар
+            </b-button>
+        </div>
+
+        <b-row>
+            <b-col v-for="item in allShopItems" :key="item._id" md="4">
+                <b-card class="shop-item-card">
+                    <b-card-title class="shop-item-card-title">
+                        Товар #{{ item.shopItemId }}
+                    </b-card-title>
+                    <b-card-text class="shop-item-card-text">
+                        <ul class="shop-item-details-list">
+                            <li><strong>Количество:</strong> {{ item.count }}</li>
+                            <li><strong>Номер в списке:</strong> {{ item.order }}</li>
+                            <li><strong>Тип валюты:</strong> {{ item.currencyType }}</li>
+                            <li><strong>Стоимость:</strong> {{ item.starsCost }}</li>
+                            <li><strong>Дата создания:</strong> {{ formatLocalTime(item.createdAt) }}</li>
+                        </ul>
+                    </b-card-text>
+                    <div class="shop-item-buttons">
+                        <b-button @click="editShopItem(item)" variant="info" class="shop-item-button">
+                            <i class="fas fa-edit"></i> Редактировать
+                        </b-button>
+                        <b-button @click="confirmDelete(item.shopItemId)" variant="danger" class="shop-item-button shop-item-button-delete">
+                            <i class="fas fa-trash-alt"></i> Удалить
+                        </b-button>
+                    </div>
+                </b-card>
+            </b-col>
+        </b-row>
+    </b-container>
+</div>

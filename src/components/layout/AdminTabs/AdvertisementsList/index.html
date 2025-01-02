@@ -1,46 +1,44 @@
-<template>
-    <div class="advertisements-view">
-        <b-container>
-            <div class="alert alert-warning" role="alert">
-                <p>Если возникли проблемы с отображением элементов на странице - отключите AdBlocker.</p>
-            </div>
+<div class="advertisements-view">
+    <b-container>
+        <div class="alert alert-warning" role="alert">
+            <p>Если возникли проблемы с отображением элементов на странице - отключите AdBlocker.</p>
+        </div>
 
-            <h2 class="genshin-heading">Управление рекламными постами</h2>
+        <h2 class="genshin-heading">Управление рекламными постами</h2>
 
-            <div class="mb-3">
-                <b-button pill variant="success" @click="addNewAdvertisement">Добавить новый пост</b-button>
-            </div>
+        <div class="mb-3">
+            <b-button pill variant="success" @click="addNewAdvertisement">Добавить новый пост</b-button>
+        </div>
 
-            <div class="advertisement-list">
-                <div v-for="advertisement in allAdvertisements" :key="advertisement._id" class="advertisement-item">
-                    <div class="advertisement-image" v-if="advertisement.imageLink">
-                        <b-img :src="advertisement.imageLink" alt="Advertisement Image" fluid />
-                    </div>
-                    <div class="advertisement-content">
-                        <h5>{{ truncateText(advertisement.message, 70) }}</h5>
-                        <p v-if="Boolean(advertisement.imageLink)">
-                            <a target="_blank" :href="advertisement.imageLink">Ссылка на изображение</a>
-                        </p>
-                        <p><b>Группы:</b> <b-badge variant="success">{{ advertisement.groups ? 'Да' : 'Нет' }}</b-badge></p>
-                        <p><b>Пользователи:</b> <b-badge variant="success">{{ advertisement.users ? 'Да' : 'Нет' }}</b-badge></p>
-                        <p><b>Отправлено:</b> <b-badge :variant="advertisement.delivered ? 'success' : 'danger'">{{ advertisement.delivered ? 'Да' : 'Нет' }}</b-badge></p>
-                        <p><b>Отправить после:</b> {{ formatLocalTime(advertisement.sendAfter) }}</p>
-                    </div>
-                    <div class="advertisement-actions">
-                        <b-button @click="previewAdvertisement(advertisement)" variant="primary">Предпросмотр</b-button>
-                        <b-button @click="editAdvertisement(advertisement)" variant="info">Редактировать</b-button>
-                        <b-button @click="deleteAdvertisement(advertisement._id)" variant="danger">Удалить</b-button>
-                    </div>
+        <div class="advertisement-list">
+            <div v-for="advertisement in allAdvertisements" :key="advertisement._id" class="advertisement-item">
+                <div class="advertisement-image" v-if="advertisement.imageLink">
+                    <b-img :src="advertisement.imageLink" alt="Advertisement Image" fluid />
+                </div>
+                <div class="advertisement-content">
+                    <h5>{{ truncateText(advertisement.message, 70) }}</h5>
+                    <p v-if="Boolean(advertisement.imageLink)">
+                        <a target="_blank" :href="advertisement.imageLink">Ссылка на изображение</a>
+                    </p>
+                    <p><b>Группы:</b> <b-badge variant="success">{{ advertisement.groups ? 'Да' : 'Нет' }}</b-badge></p>
+                    <p><b>Пользователи:</b> <b-badge variant="success">{{ advertisement.users ? 'Да' : 'Нет' }}</b-badge></p>
+                    <p><b>Отправлено:</b> <b-badge :variant="advertisement.delivered ? 'success' : 'danger'">{{ advertisement.delivered ? 'Да' : 'Нет' }}</b-badge></p>
+                    <p><b>Отправить после:</b> {{ formatLocalTime(advertisement.sendAfter) }}</p>
+                </div>
+                <div class="advertisement-actions">
+                    <b-button @click="previewAdvertisement(advertisement)" variant="primary">Предпросмотр</b-button>
+                    <b-button @click="editAdvertisement(advertisement)" variant="info">Редактировать</b-button>
+                    <b-button @click="deleteAdvertisement(advertisement._id)" variant="danger">Удалить</b-button>
                 </div>
             </div>
+        </div>
 
-            <!-- Modal for Preview -->
-            <b-modal v-model="showPreview" title="Предпросмотр сообщения" hide-footer>
-                <div v-if="selectedAdvertisement">
-                    <b-img v-if="selectedAdvertisement.imageLink" :src="selectedAdvertisement.imageLink" fluid alt="Advertisement Image" />
-                    <pre class="preview-message" v-html="compiledMessage"></pre>
-                </div>
-            </b-modal>
-        </b-container>
-    </div>
-</template>
+        <!-- Modal for Preview -->
+        <b-modal v-model="showPreview" title="Предпросмотр сообщения" hide-footer>
+            <div v-if="selectedAdvertisement">
+                <b-img v-if="selectedAdvertisement.imageLink" :src="selectedAdvertisement.imageLink" fluid alt="Advertisement Image" />
+                <pre class="preview-message" v-html="compiledMessage"></pre>
+            </div>
+        </b-modal>
+    </b-container>
+</div>

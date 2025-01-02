@@ -6,6 +6,7 @@ import banners from './banners';
 import staticData from './staticData';
 import promocodes from './promocodes';
 import advertisements from './advertisements';
+import shop from './shop';
 
 Vue.use(Vuex);
 
@@ -16,5 +17,6 @@ export default new Vuex.Store({
     staticData,
     promocodes,
     advertisements,
+    shop,
   },
 });

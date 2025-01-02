@@ -71,6 +71,24 @@ const routes = [
         component: () => import('./components/layout/AdminTabs/AdvertisementsEdit/index.vue'),
         beforeEnter: authGuard,
       },
+      {
+        path: '/gacha-simulator/admin/shop-items',
+        name: 'shopItems',
+        component: () => import('./components/layout/AdminTabs/ShopItemsList/index.vue'),
+        beforeEnter: authGuard,
+      },
+      {
+        path: '/gacha-simulator/admin/shop-items/:shopItemId',
+        name: 'shopItemsEdit',
+        component: () => import('./components/layout/AdminTabs/ShopItemsEdit/index.vue'),
+        beforeEnter: authGuard,
+      },
+      {
+        path: '/gacha-simulator/admin/shop-items-add',
+        name: 'shopItemsAdd',
+        component: () => import('./components/layout/AdminTabs/ShopItemsEdit/index.vue'),
+        beforeEnter: authGuard,
+      },
     ],
   },
 ];
